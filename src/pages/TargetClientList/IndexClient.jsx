@@ -91,7 +91,7 @@ export default function IndexClient() {
                     if (filterText === "") {
                         return value;
                     } else if (
-                        value.first && value.last
+                        value.first && value.first
                             .toLowerCase()
                             .includes(filterText.toLowerCase())
                     ) {
