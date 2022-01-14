@@ -4,16 +4,9 @@ import {
     Button,
     Center,
     FormControl,
-    FormLabel,
     GridItem,
-    HStack,
-    ListItem,
     SimpleGrid,
-    Spacer,
     Text,
-    UnorderedList,
-    useToast,
-    VStack,
     Divider,
     Modal,
     ModalOverlay,
@@ -24,10 +17,9 @@ import {
     ModalCloseButton,
     useDisclosure
 } from '@chakra-ui/react';
-import * as Yup from "yup";
+
 import { Form, Formik, useFormik } from 'formik';
 import TextField from '../../../components/Fields/TextField';
-import FormHeading from '../../../components/Labels/FormHeading';
 import DatePicker from '../../../components/Fields/DatePicker';
 import Radio from '../../../components/Fields/Radio';
 import Select from '../../../components/Fields/Select';
@@ -36,73 +28,25 @@ import { doc, updateDoc } from "firebase/firestore";
 import { db } from "../../../../utils/init-firebase";
 import NumberField from "../../../components/Fields/NumberField";
 
-export default function FormOneA() {
-
+export default function FormOneA({works}) {
+    console.log(works,"FormOneAAAAAAAA")
     const initialValues = {
-        familySerial: {
-            client: {
-                birthday: '',
-                highestEducation: '',
-                occupation: '',
-                addressStreet: '',
-                addressBarangay: '',
-                addressMunicipality: '',
-                addressProvince: '',
-            },
-            spouse: {
-                firstName: '',
-                middleName: '',
-                lastName: '',
-                birthday: '',
-                highestEducation: '',
-                occupation: ''
-            },
-            avgFamilyIncome: '',
-            noOfChildren: '',
-            birthPlan: ''
-        },
-        medicalHistory: {
-            reviewOfSystems: {
-                heent: [],
-                chestHeart: [],
-                abdomen: [],
-                genital: [],
-                extremeties: [],
-                skin: [],
-            },
-            familyHistory: '',
-            pastHealthHistory: '',
-            socialHistory: '',
-            obstericalHistory: {
-                historyOfPreviousDeliveries: '',
-                menstrualHistory: '',
-            },
-            familyPlanningHistory: {
-                previouslyUsedMethod: ''
-            }
-        },
-        physicalExamination: {
-            vitalSigns: {
-                bloodPressure: '',
-                weight: '',
-                height: '',
-                bmi: '',
-                pulseRate: ''
-            },
-            conjunctiva: '',
-            neck: '',
-            breast: '',
-            thorax: '',
-            abdomen: '',
-            vaginalExamination: '',
-            extremities: '',
-            toxoidVaccineStatus: '',
-            impressionDiagnosis: ''
-        }
+
+       ...works.FormOneA
     }
 
     const onSubmit = (values) => {
-        console.log('Form data', values)
+        updateUsers2(values)
+    }
+
+    async  function updateUsers2(values) {
+
+        const userRef = doc(db, 'client', works.id);
+        const newValues = JSON.parse(JSON.stringify(values))
+        await  updateDoc(userRef,{
+            FormOneA: newValues
+
+        })
     }
 
     const heentSelections = [
@@ -363,7 +307,7 @@ export default function FormOneA() {
                                                 <Box>
                                                     <Checkbox
                                                         label=""
-                                                        name="sideA.medicalHistory.obsterical.obstericalHistory"
+                                                        name="medicalHistory.obsterical.obstericalHistory"
                                                         options={obstericalHistorySelections}
                                                     />
                                                 </Box>
@@ -371,7 +315,7 @@ export default function FormOneA() {
 
                                                     <Checkbox
                                                         label="History of Previous Deliveries"
-                                                        name="sideA.medicalHistory.obstericalHistory.historyOfPreviousDeliveries"
+                                                        name="medicalHistory.obstericalHistory.historyOfPreviousDeliveries"
                                                         options={historyOfPreviouDeliveriesSelections}
                                                     />
                                                 </Box>
@@ -379,7 +323,7 @@ export default function FormOneA() {
 
                                                     <Checkbox
                                                         label="Menstrual History"
-                                                        name="sideA.medicalHistory.obstericalHistory.menstrualHistory"
+                                                        name="medicalHistory.obstericalHistory.menstrualHistory"
                                                         options={menstrualHistorySelections}
                                                     />
                                                 </Box>
@@ -387,7 +331,7 @@ export default function FormOneA() {
 
                                                     <TextField
                                                         label="Previously used method"
-                                                        name="sideA.medicalHistory.familyPlanningHistory.previouslyUsedMethod"
+                                                        name="medicalHistory.familyPlanningHistory.previouslyUsedMethod"
                                                     />
                                                 </Box>
                                             </SimpleGrid>
@@ -411,30 +355,30 @@ export default function FormOneA() {
                                                 </Box>
                                                 <TextField
                                                     label='Blood pressure'
-                                                    name="sideA.physicalExamination.vitalSigns.bloodPressure"
+                                                    name="physicalExamination.vitalSigns.bloodPressure"
                                                 />
                                                 <Box>
                                                     <TextField
                                                         label='Weight'
-                                                        name="sideA.physicalExamination.vitalSigns.weight"
+                                                        name="physicalExamination.vitalSigns.weight"
                                                     />
                                                 </Box>
                                                 <Box>
                                                     <TextField
                                                         label='Height'
-                                                        name="sideA.physicalExamination.vitalSigns.height"
+                                                        name="physicalExamination.vitalSigns.height"
                                                     />
                                                 </Box>
                                                 <Box>
                                                     <TextField
                                                         label='Body Mass Index'
-                                                        name="sideA.physicalExamination.vitalSigns.bmi"
+                                                        name="physicalExamination.vitalSigns.bmi"
                                                     />
                                                 </Box>
                                                 <Box>
                                                     <TextField
                                                         label='Pulse Rate'
-                                                        name="sideA.physicalExamination.vitalSigns.pulseRate"
+                                                        name="physicalExamination.vitalSigns.pulseRate"
                                                     />
                                                 </Box>
                                             </SimpleGrid>
@@ -443,56 +387,56 @@ export default function FormOneA() {
                                                 <Box>
                                                     <Checkbox
                                                         label="Conjunctiva"
-                                                        name="sideA.physicalExamination.conjunctiva"
+                                                        name="physicalExamination.conjunctiva"
                                                         options={conjunctivaSelections}
                                                     />
                                                 </Box>
                                                 <Box>
                                                     <Checkbox
                                                         label="Neck"
-                                                        name="sideA.physicalExamination.neck"
+                                                        name="physicalExamination.neck"
                                                         options={neckSelections}
                                                     />
                                                 </Box>
                                                 <Box>
                                                     <Checkbox
                                                         label="Breast"
-                                                        name="sideA.physicalExamination.breast"
+                                                        name="physicalExamination.breast"
                                                         options={breastSelections}
                                                     />
                                                 </Box>
                                                 <Box>
                                                     <Checkbox
                                                         label="Thorax"
-                                                        name="sideA.physicalExamination.thorax"
+                                                        name="physicalExamination.thorax"
                                                         options={thoraxSelections}
                                                     />
                                                 </Box>
                                                 <Box>
                                                     <Checkbox
                                                         label="Abdomen"
-                                                        name="sideA.physicalExamination.abdomen"
+                                                        name="physicalExamination.abdomen"
                                                         options={abdomenSelections2}
                                                     />
                                                 </Box>
                                                 <Box>
                                                     <Checkbox
                                                         label="Vaginal Examination"
-                                                        name="sideA.physicalExamination.vaginalExamination"
+                                                        name="physicalExamination.vaginalExamination"
                                                         options={vaginalExaminationSelections}
                                                     />
                                                 </Box>
                                                 <Box>
                                                     <Checkbox
                                                         label="Extremities"
-                                                        name="sideA.physicalExamination.extremities"
+                                                        name="physicalExamination.extremities"
                                                         options={extremitiesSelections2}
                                                     />
                                                 </Box>
                                                 <Box>
                                                     <TextField
                                                         label="Td toxoid vaccine Status:"
-                                                        name="sideA.physicalExamination.toxoidVaccineStatus"
+                                                        name="physicalExamination.toxoidVaccineStatus"
                                                     />
                                                 </Box>
                                             </SimpleGrid>
@@ -502,8 +446,8 @@ export default function FormOneA() {
                                                 <Divider orientation='horizontal' />
                                                 <Box>
                                                     <TextField
-                                                        label=""
-                                                        name="sideA.physicalExamination.impressionDiagnosis"
+                                                        label="Impression/Diagnosis"
+                                                        name="physicalExamination.impressionDiagnosis"
                                                     />
                                                 </Box>
                                             </SimpleGrid>
@@ -523,32 +467,32 @@ export default function FormOneA() {
                                                 <Text fontSize='xl'>Name of Client:</Text>
                                                 <Divider orientation='horizontal' />
                                                 <DatePicker
-                                                    name="sideA.familySerial.client.birthday"
+                                                    name="familySerial.client.birthday"
                                                     label="Birthday"
                                                 />
                                                 <Select
                                                     label="Highest Education"
-                                                    name="sideA.familySerial.client.highestEducation"
+                                                    name="familySerial.client.highestEducation"
                                                     options={highestEducationOptions}
                                                 />
                                                 <TextField
-                                                    name="sideA.familySerial.client.occupation"
+                                                    name="familySerial.client.occupation"
                                                     label="Occupation"
                                                 />
                                                 <TextField
-                                                    name="sideA.familySerial.client.addressStreet"
+                                                    name="familySerial.client.addressStreet"
                                                     label="Street"
                                                 />
                                                 <TextField
-                                                    name="sideA.familySerial.client.addressBarangay"
+                                                    name="familySerial.client.addressBarangay"
                                                     label="Barangay"
                                                 />
                                                 <TextField
-                                                    name="sideA.familySerial.client.addressMunicipality"
+                                                    name="familySerial.client.addressMunicipality"
                                                     label="Municipality"
                                                 />
                                                 <TextField
-                                                    name="sideA.familySerial.client.addressProvince"
+                                                    name="familySerial.client.addressProvince"
                                                     label="Province"
                                                 />
                                             </SimpleGrid>
@@ -557,45 +501,45 @@ export default function FormOneA() {
                                                 <Text fontSize='xl'>Name of Spouse:</Text>
                                                 <Divider orientation='horizontal' />
                                                 <TextField
-                                                    name="sideA.familySerial.spouse.lastName"
+                                                    name="familySerial.spouse.lastName"
                                                     label="Last Name"
                                                 />
                                                 <TextField
-                                                    name="sideA.familySerial.spouse.firstName"
+                                                    name="familySerial.spouse.firstName"
                                                     label="First Name"
                                                 />
                                                 <TextField
-                                                    name="sideA.familySerial.spouse.middleName"
+                                                    name="familySerial.spouse.middleName"
                                                     label="Middle Name"
                                                 />
                                                 <DatePicker
-                                                    name="sideA.familySerial.spouse.birthday"
+                                                    name="familySerial.spouse.birthday"
                                                     label="Birthday"
                                                 />
                                                 <Select
                                                     label="Highest Education"
-                                                    name="sideA.familySerial.spouse.highestEducation"
+                                                    name="familySerial.spouse.highestEducation"
                                                     options={highestEducationOptions}
                                                 />
                                                 <GridItem>
                                                     <TextField
-                                                        name="sideA.familySerial.spouse.occupation"
+                                                        name="familySerial.spouse.occupation"
                                                         label="Occupation"
                                                     />
                                                 </GridItem>
                                             </SimpleGrid>
                                             <SimpleGrid >
                                                 <NumberField
-                                                    name="sideA.familySerial.avgFamilyIncome"
+                                                    name="familySerial.avgFamilyIncome"
                                                     label="Average Family Income"
                                                 />
                                                 <NumberField
-                                                    name="sideA.familySerial.noOfChildren"
+                                                    name="familySerial.noOfChildren"
                                                     label="No. of Children"
                                                 />
                                                 <Radio
                                                     label="Birth Plan"
-                                                    name="sideA.familySerial.birthPlan"
+                                                    name="familySerial.birthPlan"
                                                     options={birthPlanOptions}
                                                 />
                                             </SimpleGrid>

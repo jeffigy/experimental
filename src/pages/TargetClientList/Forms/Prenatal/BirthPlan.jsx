@@ -20,66 +20,31 @@ import NumberField from "../../../components/Fields/NumberField";
 import Select from "../../../components/Fields/Select";
 import { bloodOptions, transportOption } from "../../../components/Constants";
 import { Formik, Field, Form } from 'formik';
+
 const accredationStatusOpt = [
     { key: 'Yes', value: 'yes' },
     { key: 'no', value: 'no' }
 ];
-export default function BirthPlan() {
+export default function BirthPlan({works}) {
     const { isOpen, onOpen, onClose } = useDisclosure()
     const initialValues = {
-        attendantName: '',
-        deliveryLocation: '',
-        accredationStatus: '',
-        distanceFromResidence: '',
-        estimatedCost: '',
-        modeOfPayment: '',
-
-        availableTransportation: '',
-        bringer: {
-            Name: '',
-            Address: '',
-            Number: '',
-        },
-        companion: {
-            Name: '',
-            Relationship: '',
-            Address: '',
-            Number: '',
-        },
-        careTaker: {
-            Name: '',
-            Relationship: '',
-        },
-
-        bloodType: '',
-        donors: {
-            donorName1: '',
-            donorAddress1: '',
-            donorName2: '',
-            donorAddress2: ''
-        },
-        complicationReferral: {
-            name: '',
-            address: '',
-            number: ''
-        },
-
-        maternalHostpital: {
-            name: '',
-            address: '',
-        },
-        newbornHostpital: {
-            name: '',
-            address: '',
-        },
-        conforme: {
-            signature: '',
-            date: ''
-        }
+      ...works.BirthPlan
     }
     const onSubmit = (values) => {
-        console.log('Form data', values)
+        updateUsers2(values)
     }
+
+    async  function updateUsers2(values) {
+
+        const userRef = doc(db, 'client', works.id);
+        const newValues = JSON.parse(JSON.stringify(values))
+        await  updateDoc(userRef,{
+            BirthPlan: newValues
+
+        })
+    }
+
+
     return (
         <>
             <Button onClick={onOpen}>Birth Plan</Button>

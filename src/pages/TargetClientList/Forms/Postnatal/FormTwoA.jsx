@@ -7,14 +7,8 @@ import {
     FormLabel,
     GridItem,
     HStack,
-    ListItem,
     SimpleGrid,
-    Flex,
-    Spacer,
     Text,
-    UnorderedList,
-    useToast,
-    VStack,
     Divider,
     Modal,
     ModalOverlay,
@@ -26,121 +20,35 @@ import {
     useDisclosure,
     FormHelperText
 } from '@chakra-ui/react';
-import * as Yup from "yup";
+
 import { Form, Formik } from 'formik';
 import TextField from '../../../components/Fields/TextField';
 import DatePicker from '../../../components/Fields/DatePicker';
 import Radio from '../../../components/Fields/Radio';
-import Select from '../../../components/Fields/Select';
 import Checkbox from '../../../components/Fields/Checkbox';
 import { doc, updateDoc } from "firebase/firestore";
 import { db } from "../../../../utils/init-firebase";
 import NumberField from "../../../components/Fields/NumberField";
 
 
-export default function FormTwoA() {
+export default function FormTwoA({works}) {
 
     const initialValues = {
-        dateOfVisit: '',
-        physicalExamination: {
-            dateOfDelivery: '',
-            attendant: '',
-            sex: '',
-            typeOfDelivery: '',
-            placeOfDelivery: '',
-            amtsl: {
-                steps: {
-                    noOne: '',
-                    noTwo: '',
-                    noThree: ''
-                },
-                isProvided: ''
-            }
-        },
-        assessment: {
-            postPartumMother: {
-                dangerSigns: {
-
-                    unconscious: '',
-                    VaginalBleeding: {
-                        hrs: '',
-                        days: '',
-                        otherVisit: ''
-                    },
-                    severeAbdominalPain: '',
-                    looksVeryIll: '',
-                    severeHeadache: '',
-                    severeDiffOfBreath: '',
-                    severeVomiting: '',
-                    postPartumDepression: '',
-                },
-                pelvicExamFindings: {
-                    uterus: {
-                        contracted: '',
-                        relaxed: ''
-                    },
-                    vaginalBleeding: {
-                        profuse: '',
-                        moderate: '',
-                        scanty: ''
-                    },
-                    vaginalDischarge: {
-                        color: '',
-                        odor: ''
-                    },
-                    vaginalLaceration: {
-                        firstDegree: '',
-                        secondDegree: '',
-                        thirdDegree: '',
-                        lacerationSutured: ''
-                    },
-                    ifCs: '',
-                }
-            },
-            newborn: {
-                withPoorSuck: '',
-                ifBreathing: '',
-                severeChestIndrawing: '',
-                grunting: '',
-                convulsions: '',
-                floppyStiffExtremities: '',
-                temp: '',
-                severeJaundice: '',
-                bleedingFromUmbilicalStumpOrCut: '',
-                umbilicusDraining: '',
-                foulSmellingDischarge: '',
-                skinPostules: '',
-                essentialNewbornCare: {
-                    one: '',
-                    two: '',
-                    three: '',
-                    four: '',
-                    earlyEncGiven: ''
-                },
-                breastFeeding: "",
-                otherEncGiven: {
-                    vitKInjection: "",
-                    eyePropylaxis: "",
-                    newbornScreening: "",
-                    others: ""
-                },
-                newbornScreeningDone: ""
-            }
-        },
-        supplementation: {
-            noOfTabletsGiven: {
-                no: '',
-                dateGiven: ''
-            },
-            vitaminA: {
-                no: '',
-                dateGiven: ''
-            }
-        },
+    ...works.FormTwoA
     }
 
     const onSubmit = (values) => {
-        console.log('Form data', values)
+        updateUsers2(values)
+    }
+
+    async  function updateUsers2(values) {
+
+        const userRef = doc(db, 'client', works.id);
+        const newValues = JSON.parse(JSON.stringify(values))
+        await  updateDoc(userRef,{
+            FormTwoA: newValues
+
+        })
     }
 
     const attendantOpt = [

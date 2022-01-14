@@ -15,6 +15,7 @@
     "framer-motion": "^4.1.17",
     "i": "^0.3.7",
     "iframe-resizer-react": "^1.1.0",
+    "moment": "^2.29.1",
     "npm": "^8.3.0",
     "react": "^17.0.2",
     "react-data-table-component": "^7.4.6",

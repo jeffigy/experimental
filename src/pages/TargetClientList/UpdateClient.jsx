@@ -12,6 +12,7 @@ import { EditIcon } from '@chakra-ui/icons'
 export default function UpdateClient({ works }) {
   const [setData] = useState(works);
   const { isOpen, onOpen, onClose } = useDisclosure()
+
   return (
     <>
       <Tooltip
@@ -36,17 +37,17 @@ export default function UpdateClient({ works }) {
                 MATERNAL CLIENT RECORD for Prenatal Care
               </Text>
               <HStack align='stretch'>
-                <FormOneA />
-                <FormOneB />
-                <BirthPlan />
+                <FormOneA works={works}/>
+                <FormOneB works={works}/>
+                <BirthPlan works={works}/>
               </HStack>
               <Spacer />
               <Text fontWeight='bold' mb='1rem'>
                 Maternal Client Record for Postpartum and Neotanatal Care
               </Text>
               <HStack align='stretch'>
-                <FormTwoA />
-                <FormTwoB />
+                <FormTwoA works={works} />
+                <FormTwoB works={works}/>
               </HStack>
               <Spacer />
             </VStack>

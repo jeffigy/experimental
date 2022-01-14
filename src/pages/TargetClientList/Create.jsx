@@ -41,7 +41,8 @@ export default function Create() {
     async function createClient(values) {
 
         const usersCollectionRef = collection(db, "client");
-        await addDoc(usersCollectionRef, {
+        await addDoc(usersCollectionRef,
+            {
             first: values.firstname,
             middle: values.middlename,
             last: values.lastname,
@@ -49,48 +50,137 @@ export default function Create() {
             legislativeDistrict: values.legislativeDistrict,
             barangay: values.barangay,
             age: values.age,
-            Figure1: {
-                year: new Date(),
-                region: '11',
-                province: '',
-                municipality: '',
-                barangay: '',
-                birthingCenter: '',
-                birthingCenterAddress: '',
-                referralCenter: '',
-                referralCenterAddress: '',
+                FormTwoA:{
+                    dateOfVisit: new Date(),
+                    physicalExamination: {
+                        dateOfDelivery: '',
+                        attendant: '',
+                        sex: '',
+                        typeOfDelivery: '',
+                        placeOfDelivery: '',
+                        amtsl: {
+                            steps: {
+                                noOne: '',
+                                noTwo: '',
+                                noThree: ''
+                            },
+                            isProvided: ''
+                        }
+                    },
+                    assessment: {
+                        postPartumMother: {
+                            dangerSigns: {
 
-                lastName: '',
-                firstName: '',
-                middleName: '',
-                age: '',
-                gravidity: "",
-                parity: "",
-                expDateOfDel: new Date(),
-
-                firstTri: new Date(),
-                secondTri: new Date(),
-                thirdTri: new Date(),
-                pregOutcome: "",
-
-                dayOfDischarge: new Date(),
-                withinSevDays: new Date(),
-                liveBirth: new Date(),
-                maternalDeath: new Date(),
-                stillBirth: new Date(),
-                earlyNewborn: new Date(),
-
-                nameOfBhw: "",
-                barHealthStat: "",
-                nameOfMidwife: "",
-                ruralHealthUnit: "",
+                                unconscious: '',
+                                VaginalBleeding: {
+                                    hrs: '',
+                                    days: '',
+                                    otherVisit: ''
+                                },
+                                severeAbdominalPain: '',
+                                looksVeryIll: '',
+                                severeHeadache: '',
+                                severeDiffOfBreath: '',
+                                severeVomiting: '',
+                                postPartumDepression: '',
+                            },
+                            pelvicExamFindings: {
+                                uterus: {
+                                    contracted: '',
+                                    relaxed: ''
+                                },
+                                vaginalBleeding: {
+                                    profuse: '',
+                                    moderate: '',
+                                    scanty: ''
+                                },
+                                vaginalDischarge: {
+                                    color: '',
+                                    odor: ''
+                                },
+                                vaginalLaceration: {
+                                    firstDegree: '',
+                                    secondDegree: '',
+                                    thirdDegree: '',
+                                    lacerationSutured: ''
+                                },
+                                ifCs: '',
+                            }
+                        },
+                        newborn: {
+                            withPoorSuck: '',
+                            ifBreathing: '',
+                            severeChestIndrawing: '',
+                            grunting: '',
+                            convulsions: '',
+                            floppyStiffExtremities: '',
+                            temp: '',
+                            severeJaundice: '',
+                            bleedingFromUmbilicalStumpOrCut: '',
+                            umbilicusDraining: '',
+                            foulSmellingDischarge: '',
+                            skinPostules: '',
+                            essentialNewbornCare: {
+                                one: '',
+                                two: '',
+                                three: '',
+                                four: '',
+                                earlyEncGiven: ''
+                            },
+                            breastFeeding: "",
+                            otherEncGiven: {
+                                vitKInjection: "",
+                                eyePropylaxis: "",
+                                newbornScreening: "",
+                                others: ""
+                            },
+                            newbornScreeningDone: ""
+                        }
+                    },
+                    supplementation: {
+                        noOfTabletsGiven: {
+                            no: '',
+                            dateGiven: new Date()
+                        },
+                        vitaminA: {
+                            no: '',
+                            dateGiven: new Date()
+                        }
+                    },
+                },
+                FormTwoB:    {records: {
+            row1: {
+                date: new Date(),
+                    complaints: '',
+                    mncServicesGiven: '',
+                    nameOfProviderAndSignature: '',
+                    nextFollowUpSchedule: new Date()
             },
-
-            Figure2: {
-                sideA: {
-                    familySerial: {
+            row2: {
+                date: new Date(),
+                    complaints: '',
+                    mncServicesGiven: '',
+                    nameOfProviderAndSignature: '',
+                    nextFollowUpSchedule: new Date()
+            },
+            row3: {
+                date: new Date(),
+                    complaints: '',
+                    mncServicesGiven: '',
+                    nameOfProviderAndSignature: '',
+                    nextFollowUpSchedule: new Date()
+            },
+            row4: {
+                date: new Date(),
+                    complaints: '',
+                    mncServicesGiven: '',
+                    nameOfProviderAndSignature: '',
+                    nextFollowUpSchedule: new Date()
+            }
+        }},
+                FormOneA:{ familySerial: {
                         client: {
-                            birthday: new Date(),
+                            birthday:        new Date(),
                             highestEducation: '',
                             occupation: '',
                             addressStreet: '',
@@ -102,7 +192,7 @@ export default function Create() {
                             firstName: '',
                             middleName: '',
                             lastName: '',
-                            birthday: new Date(),
+                            birthday:        new Date(),
                             highestEducation: '',
                             occupation: ''
                         },
@@ -116,514 +206,249 @@ export default function Create() {
                             chestHeart: [],
                             abdomen: [],
                             genital: [],
-
                             extremeties: [],
                             skin: [],
                         },
-                        familyHistory: "",
-                        pastHealthHistory: "",
-                        socialHistory: "",
+                        familyHistory: '',
+                        pastHealthHistory: '',
+                        socialHistory: '',
                         obstericalHistory: {
-                            historyOfPreviousDeliveries: "",
-                            menstrualHistory: "",
+                            historyOfPreviousDeliveries: '',
+                            menstrualHistory: '',
                         },
                         familyPlanningHistory: {
-                            previouslyUsedMethod: ""
+                            previouslyUsedMethod: ''
                         }
                     },
                     physicalExamination: {
                         vitalSigns: {
-                            bloodPressure: "",
-                            weight: "",
-                            height: "",
-                            bmi: "",
-                            pulseRate: ""
+                            bloodPressure: '',
+                            weight: '',
+                            height: '',
+                            bmi: '',
+                            pulseRate: ''
                         },
-                        conjunctiva: [],
-                        neck: [],
-                        breast: [],
-                        thorax: [],
-                        abdomen: [],
-                        vaginalExamination: [],
-                        extremities: [],
-                        toxoidVaccineStatus: "",
-                        impressionDiagnosis: ""
+                        conjunctiva: '',
+                        neck: '',
+                        breast: '',
+                        thorax: '',
+                        abdomen: '',
+                        vaginalExamination: '',
+                        extremities: '',
+                        toxoidVaccineStatus: '',
+                        impressionDiagnosis: ''
                     }
                 },
-
-                sideB: {
-                    records: {
+                FormOneB:{    records: {
                         row1: {
-                            date: new Date(),
-                            complaints: "",
-                            mncServicesGiven: "",
-                            nameOfProviderAndSignature: "",
-                            nextFollowUpSchedule: new Date()
+                            date:    new Date(),
+                            complaints: '',
+                            mncServicesGiven: '',
+                            nameOfProviderAndSignature: '',
+                            nextFollowUpSchedule:    new Date()
                         },
                         row2: {
-                            date: new Date(),
-                            complaints: "",
-                            mncServicesGiven: "",
-                            nameOfProviderAndSignature: "",
-                            nextFollowUpSchedule: new Date()
+                            date:    new Date(),
+                            complaints: '',
+                            mncServicesGiven: '',
+                            nameOfProviderAndSignature: '',
+                            nextFollowUpSchedule:    new Date()
                         },
                         row3: {
-                            date: new Date(),
-                            complaints: "",
-                            mncServicesGiven: "",
-                            nameOfProviderAndSignature: "",
-                            nextFollowUpSchedule: new Date()
+                            date:    new Date(),
+                            complaints: '',
+                            mncServicesGiven: '',
+                            nameOfProviderAndSignature: '',
+                            nextFollowUpSchedule:    new Date()
                         },
                         row4: {
-                            date: new Date(),
-                            complaints: "",
-                            mncServicesGiven: "",
-                            nameOfProviderAndSignature: "",
-                            nextFollowUpSchedule: new Date()
+                            date:    new Date(),
+                            complaints: '',
+                            mncServicesGiven: '',
+                            nameOfProviderAndSignature: '',
+                            nextFollowUpSchedule:    new Date()
                         }
                     },
                     abdominalExamFindings: {
                         firstTrimester: {
                             firstMonth: {
-                                date: new Date(),
-                                fundicHeight: "",
-                                fetalHeartTomes: "",
-                                aog: "",
-                                leopolds: "",
-                                lOne: "",
-                                lTwo: "",
-                                lThree: "",
-                                lFour: "",
-                                uterineAcitivty: ""
+                                date:    new Date(),
+                                fundicHeight: '',
+                                fetalHeartTomes: '',
+                                aog: '',
+                                leopolds: '',
+                                lOne: '',
+                                lTwo: '',
+                                lThree: '',
+                                lFour: '',
+                                uterineAcitivty: ''
                             },
                             secondMonth: {
-                                date: new Date(),
-                                fundicHeight: "",
-                                fetalHeartTomes: "",
-                                aog: "",
-                                leopolds: "",
-                                lOne: "",
-                                lTwo: "",
-                                lThree: "",
-                                lFour: "",
-                                uterineAcitivty: ""
+                                date:    new Date(),
+                                fundicHeight: '',
+                                fetalHeartTomes: '',
+                                aog: '',
+                                leopolds: '',
+                                lOne: '',
+                                lTwo: '',
+                                lThree: '',
+                                lFour: '',
+                                uterineAcitivty: ''
                             },
                             thirdMonth: {
-                                date: new Date(),
-                                fundicHeight: "",
-                                fetalHeartTomes: "",
-                                aog: "",
-                                leopolds: "",
-                                lOne: "",
-                                lTwo: "",
-                                lThree: "",
-                                lFour: "",
-                                uterineAcitivty: ""
+                                date:    new Date(),
+                                fundicHeight: '',
+                                fetalHeartTomes: '',
+                                aog: '',
+                                leopolds: '',
+                                lOne: '',
+                                lTwo: '',
+                                lThree: '',
+                                lFour: '',
+                                uterineAcitivty: ''
+
                             }
                         },
                         secondTrimester: {
                             fourthMonth: {
-                                date: new Date(),
-                                fundicHeight: "",
-                                fetalHeartTomes: "",
-                                aog: "",
-                                leopolds: "",
-                                lOne: "",
-                                lTwo: "",
-                                lThree: "",
-                                lFour: "",
-                                uterineAcitivty: ""
+                                date:    new Date(),
+                                fetalHeartTomes: '',
+                                aog: '',
+                                leopolds: '',
+                                lOne: '',
+                                lTwo: '',
+                                lThree: '',
+                                lFour: '',
+                                uterineAcitivty: ''
                             },
                             fifthMonth: {
-                                date: new Date(),
-                                fundicHeight: "",
-                                fetalHeartTomes: "",
-                                aog: "",
-                                leopolds: "",
-                                lOne: "",
-                                lTwo: "",
-                                lThree: "",
-                                lFour: "",
-                                uterineAcitivty: ""
+                                date:    new Date(),
+                                fundicHeight: '',
+                                fetalHeartTomes: '',
+                                aog: '',
+                                leopolds: '',
+                                lOne: '',
+                                lTwo: '',
+                                lThree: '',
+                                lFour: '',
+                                uterineAcitivty: ''
                             },
                             sixthMonth: {
-                                date: new Date(),
-                                fundicHeight: "",
-                                fetalHeartTomes: "",
-                                aog: "",
-                                leopolds: "",
-                                lOne: "",
-                                lTwo: "",
-                                lThree: "",
-                                lFour: "",
-                                uterineAcitivty: ""
+                                date:    new Date(),
+                                fundicHeight: '',
+                                fetalHeartTomes: '',
+                                aog: '',
+                                leopolds: '',
+                                lOne: '',
+                                lTwo: '',
+                                lThree: '',
+                                lFour: '',
+                                uterineAcitivty: ''
                             }
                         },
                         thirdTrimester: {
                             seventhMonth: {
-                                date: new Date(),
-                                fundicHeight: "",
-                                fetalHeartTomes: "",
-                                aog: "",
-                                leopolds: "",
-                                lOne: "",
-                                lTwo: "",
-                                lThree: "",
-                                lFour: "",
-                                uterineAcitivty: ""
+                                date:    new Date(),
+                                fundicHeight: '',
+                                fetalHeartTomes: '',
+                                aog: '',
+                                leopolds: '',
+                                lOne: '',
+                                lTwo: '',
+                                lThree: '',
+                                lFour: '',
+                                uterineAcitivty: ''
                             },
                             eightMonth: {
-                                date: new Date(),
-                                fundicHeight: "",
-                                fetalHeartTomes: "",
-                                aog: "",
-                                leopolds: "",
-                                lOne: "",
-                                lTwo: "",
-                                lThree: "",
-                                lFour: "",
-                                uterineAcitivty: ""
+                                date:    new Date(),
+                                fundicHeight: '',
+                                fetalHeartTomes: '',
+                                aog: '',
+                                leopolds: '',
+                                lOne: '',
+                                lTwo: '',
+                                lThree: '',
+                                lFour: '',
+                                uterineAcitivty: ''
                             },
                             ninethMonth: {
-                                date: new Date(),
-                                fundicHeight: "",
-                                fetalHeartTomes: "",
-                                aog: "",
-                                leopolds: "",
-                                lOne: "",
-                                lTwo: "",
-                                lThree: "",
-                                lFour: "",
-                                uterineAcitivty: ""
+                                date:    new Date(),
+                                fundicHeight: '',
+                                fetalHeartTomes: '',
+                                aog: '',
+                                leopolds: '',
+                                lOne: '',
+                                lTwo: '',
+                                lThree: '',
+                                lFour: '',
+                                uterineAcitivty: ''
                             }
                         },
                         remarks: {
-                            date: new Date(),
-                            fundicHeight: "",
-                            fetalHeartTomes: "",
-                            aog: "",
-                            leopolds: "",
-                            lOne: "",
-                            lTwo: "",
-                            lThree: "",
-                            lFour: "",
-                            uterineAcitivty: ""
+                            date:    new Date(),
+                            fundicHeight: '',
+                            fetalHeartTomes: '',
+                            aog: '',
+                            leopolds: '',
+                            lOne: '',
+                            lTwo: '',
+                            lThree: '',
+                            lFour: '',
+                            uterineAcitivty: ''
                         }
-                    }
-                },
-            },
+                    }},
+                BirthPlan:{  attendantName: '',
+                    deliveryLocation: '',
+                    accredationStatus: '',
+                    distanceFromResidence: '',
+                    estimatedCost: '',
+                    modeOfPayment: '',
 
+                    availableTransportation: '',
+                    bringer: {
+                        Name: '',
+                        Address: '',
+                        Number: '',
+                    },
+                    companion: {
+                        Name: '',
+                        Relationship: '',
+                        Address: '',
+                        Number: '',
+                    },
+                    careTaker: {
+                        Name: '',
+                        Relationship: '',
+                    },
 
-            Figure4: {
-                attendantName: "",
-                deliveryLocation: "",
-                accreditationStatus: "",
-                distanceFromResidence: "",
-                estimatedCost: "",
-                modeOfPayment: "",
+                    bloodType: '',
+                    donors: {
+                        donorName1: '',
+                        donorAddress1: '',
+                        donorName2: '',
+                        donorAddress2: ''
+                    },
+                    complicationReferral: {
+                        name: '',
+                        address: '',
+                        number: ''
+                    },
 
-                availableTransportation: "",
-                bringer: {
-                    Name: "",
-                    Address: "",
-                    Number: "",
-                },
-                companion: {
-                    Name: "",
-                    Relationship: "",
-                    Address: "",
-                    Number: "",
-                },
-                careTaker: {
-                    Name: "",
-                    Relationship: "",
-                },
+                    maternalHostpital: {
+                        name: '',
+                        address: '',
+                    },
+                    newbornHostpital: {
+                        name: '',
+                        address: '',
+                    },
+                    conforme: {
+                        signature: '',
+                        date:   new Date()
+                    }}
 
-                bloodType: "",
-                donors: {
-                    donorName1: "",
-                    donorAddress1: "",
-                    donorName2: "",
-                    donorAddress2: ""
-                },
-                complicationReferral: {
-                    name: "",
-                    address: "",
-                    number: ""
-                },
-
-                maternalHostpital: {
-                    name: "",
-                    address: "",
-                },
-                newbornHostpital: {
-                    name: "",
-                    address: "",
-                },
-                conforme: {
-                    signature: "",
-                    date: new Date()
-                }
-            },
-            Figure5: {
-                dateOfVisit: new Date(),
-                physicalExamination: {
-                    dateOfDelivery: new Date(),
-                    attendant: "",
-                    sex: "",
-                    typeOfDelivery: "",
-                    placeOfDelivery: "",
-                    amtsl: {
-                        steps: {
-                            noOne: "",
-                            noTwo: "",
-                            noThree: ""
-                        },
-                        isProvided: ""
-                    }
-                },
-                assessment: {
-                    postPartumMother: {
-                        dangerSigns: {
-                            unconscious: [],
-                            VaginalBleeding: {
-                                hrs: "",
-                                days: "",
-                                otherVisit: ""
-                            },
-                            severeAbdominalPain: [],
-                            looksVeryIll: [],
-                            severeHeadache: [],
-                            severeDiffOfBreath: [],
-                            severeVomiting: [],
-                            postPartumDepression: [],
-                        },
-                        pelvicExamFindings: {
-                            uterus: {
-                                contracted: [],
-                                relaxed: []
-                            },
-                            vaginalBleeding: {
-                                profuse: [],
-                                moderate: [],
-                                scanty: []
-                            },
-                            vaginalDischarge: {
-                                color: [],
-                                odor: []
-                            },
-                            vaginalLaceration: {
-                                firstDegree: [],
-                                secondDegree: [],
-                                thirdDegree: [],
-                                lacerationSutured: ""
-                            },
-                            ifCs: []
-                        }
-                    },
-                    newborn: {
-                        withPoorSuck: [],
-                        ifBreathing: [],
-                        severeChestIndrawing: [],
-                        grunting: [],
-                        convulsions: [],
-                        floppyStiffExtremities: [],
-                        temp: [],
-                        severeJaundice: [],
-                        bleedingFromUmbilicalStumpOrCut: [],
-                        umbilicusDraining: [],
-                        foulSmellingDischarge: [],
-                        skinPostules: [],
-                        essentialNewbornCare: {
-                            one: "",
-                            two: "",
-                            three: "",
-                            four: "",
-                            earlyEncGiven: ""
-                        },
-                        breastFeeding: [],
-                        otherEncGiven: {
-                            vitKInjection: [],
-                            eyePropylaxis: [],
-                            newbornScreening: [],
-                            others: []
-                        },
-                        newbornScreeningDone: []
-                    }
-                },
-                supplementation: {
-                    noOfTabletsGiven: {
-                        no: "",
-                        dateGiven: new Date()
-                    },
-                    vitaminA: {
-                        no: "",
-                        dateGiven: new Date()
-                    }
-                },
-                records: {
-                    row1: {
-                        date: new Date(),
-                        complaints: "",
-                        mncServicesGiven: "",
-                        nameOfProviderAndSignature: "",
-                        nextFollowUpSchedule: new Date()
-                    },
-                    row2: {
-                        date: new Date(),
-                        complaints: "",
-                        mncServicesGiven: "",
-                        nameOfProviderAndSignature: "",
-                        nextFollowUpSchedule: new Date()
-                    },
-                    row3: {
-                        date: new Date(),
-                        complaints: "",
-                        mncServicesGiven: "",
-                        nameOfProviderAndSignature: "",
-                        nextFollowUpSchedule: new Date()
-                    },
-                    row4: {
-                        date: new Date(),
-                        complaints: "",
-                        mncServicesGiven: "",
-                        nameOfProviderAndSignature: "",
-                        nextFollowUpSchedule: new Date()
-                    }
-                },
-
-
-
-            },
-            Figure6: {
-                dateOfRegistration: new Date(),
-                familySerialNo: "",
-                sociEconomicStatus: "",
-                age: "",
-                lmp: {
-                    lmp: new Date(),
-                    gp: new Date(),
-                },
-                edc: new Date(),
-                datesOfPrenatalCheckUps: {
-                    firstTri: new Date(),
-                    secondTri: new Date(),
-                    thirdTri: new Date()
-                },
-                immunizationStatus: {
-                    tetanusDiptheria: {
-                        td1: new Date(),
-                        td2: new Date(),
-                        td3: new Date(),
-                        td4: new Date(),
-                        td5: new Date()
-                    },
-                    fimStatus: ""
-                },
-                micronutrientSupplementation1: {
-                    ironSulfate: {
-                        firstVisit: {
-                            date: new Date(),
-                            no: ""
-                        },
-                        secondVisit: {
-                            date: new Date(),
-                            no: ""
-                        },
-                        thirdVisit: {
-                            date: new Date(),
-                            no: ""
-                        },
-                        fourthVisit: {
-                            date: new Date(),
-                            no: ""
-                        }
-                    },
-                    calciumCarbonate: {
-                        secondVisit: {
-                            date: new Date(),
-                            no: ""
-                        },
-                        thirdVisit: {
-                            date: new Date(),
-                            no: ""
-                        },
-                        fourthVisit: {
-                            date: new Date(),
-                            no: ""
-                        }
-                    },
-                    iodineCapsules: new Date()
-                },
-                nutritionalAssessment: {
-                    low: "",
-                    normal: "",
-                    high: ""
-                },
-                dewormingTablet: new Date(),
-                infectiousDiseaseSurveillance: {
-                    syphilisScreening: {
-                        date: new Date(),
-                        result: "",
-                    },
-                    hepatitisBScreening: {
-                        date: new Date(),
-                        result: "",
-                    },
-                    hivScreening: {
-                        date: new Date(),
-                    }
-                },
-                laboratoryScreening: {
-                    gestationalDiabetes: {
-                        dateScreened: new Date(),
-                        result: "negative"
-                    },
-                    cbc: {
-                        dateScreened: new Date(),
-                        result: "negative",
-                        givenIron: ""
-                    }
-                },
-                birthWeight: {
-                    low: "",
-                    normal: "",
-                    unknown: ""
-                },
-                placeOfDelivery: {
-                    healthFacility: {
-                        type: "",
-                        bemonc: "",
-                        ownership: ""
-                    },
-                    nonHealthFacility: "",
-                    remarks: ""
-                },
-                dateTimeOfDelivery: new Date(),
-                MomAndNewbornPostPartumCheckUps: {
-                    withinTwentyFourHours: new Date(),
-                    withinSevenDays: new Date()
-                },
-                micronutrientSupplementation2: {
-                    ironWithFolicAcid: {
-                        firstMonth: {
-                            no: "",
-                            date: new Date()
-                        },
-                        secondMonth: {
-                            no: "",
-                            date: new Date()
-                        },
-                        thirdMonth: {
-                            no: "",
-                            date: new Date()
-                        }
-                    },
-                    vitaminA: new Date()
-                },
-                remarks: ""
-            },
-        });
+        }
+        );
 
     }
 

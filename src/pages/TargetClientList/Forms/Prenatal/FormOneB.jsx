@@ -36,173 +36,28 @@ import { doc, updateDoc } from "firebase/firestore";
 import { db } from "../../../../utils/init-firebase";
 import NumberField from "../../../components/Fields/NumberField";
 
-export default function FormOneB() {
+export default function FormOneB({works}) {
 
     const initialValues = {
-        records: {
-            row1: {
-                date: '',
-                complaints: '',
-                mncServicesGiven: '',
-                nameOfProviderAndSignature: '',
-                nextFollowUpSchedule: ''
-            },
-            row2: {
-                date: '',
-                complaints: '',
-                mncServicesGiven: '',
-                nameOfProviderAndSignature: '',
-                nextFollowUpSchedule: ''
-            },
-            row3: {
-                date: '',
-                complaints: '',
-                mncServicesGiven: '',
-                nameOfProviderAndSignature: '',
-                nextFollowUpSchedule: ''
-            },
-            row4: {
-                date: '',
-                complaints: '',
-                mncServicesGiven: '',
-                nameOfProviderAndSignature: '',
-                nextFollowUpSchedule: ''
-            }
-        },
-        abdominalExamFindings: {
-            firstTrimester: {
-                firstMonth: {
-                    date: '',
-                    fundicHeight: '',
-                    fetalHeartTomes: '',
-                    aog: '',
-                    leopolds: '',
-                    lOne: '',
-                    lTwo: '',
-                    lThree: '',
-                    lFour: '',
-                    uterineAcitivty: ''
-                },
-                secondMonth: {
-                    date: '',
-                    fundicHeight: '',
-                    fetalHeartTomes: '',
-                    aog: '',
-                    leopolds: '',
-                    lOne: '',
-                    lTwo: '',
-                    lThree: '',
-                    lFour: '',
-                    uterineAcitivty: ''
-                },
-                thirdMonth: {
-                    date: '',
-                    fundicHeight: '',
-                    fetalHeartTomes: '',
-                    aog: '',
-                    leopolds: '',
-                    lOne: '',
-                    lTwo: '',
-                    lThree: '',
-                    lFour: '',
-                    uterineAcitivty: ''
 
-                }
-            },
-            secondTrimester: {
-                fourthMonth: {
-                    date: '',
-                    fetalHeartTomes: '',
-                    aog: '',
-                    leopolds: '',
-                    lOne: '',
-                    lTwo: '',
-                    lThree: '',
-                    lFour: '',
-                    uterineAcitivty: ''
-                },
-                fifthMonth: {
-                    date: '',
-                    fundicHeight: '',
-                    fetalHeartTomes: '',
-                    aog: '',
-                    leopolds: '',
-                    lOne: '',
-                    lTwo: '',
-                    lThree: '',
-                    lFour: '',
-                    uterineAcitivty: ''
-                },
-                sixthMonth: {
-                    date: '',
-                    fundicHeight: '',
-                    fetalHeartTomes: '',
-                    aog: '',
-                    leopolds: '',
-                    lOne: '',
-                    lTwo: '',
-                    lThree: '',
-                    lFour: '',
-                    uterineAcitivty: ''
-                }
-            },
-            thirdTrimester: {
-                seventhMonth: {
-                    date: '',
-                    fundicHeight: '',
-                    fetalHeartTomes: '',
-                    aog: '',
-                    leopolds: '',
-                    lOne: '',
-                    lTwo: '',
-                    lThree: '',
-                    lFour: '',
-                    uterineAcitivty: ''
-                },
-                eightMonth: {
-                    date: '',
-                    fundicHeight: '',
-                    fetalHeartTomes: '',
-                    aog: '',
-                    leopolds: '',
-                    lOne: '',
-                    lTwo: '',
-                    lThree: '',
-                    lFour: '',
-                    uterineAcitivty: ''
-                },
-                ninethMonth: {
-                    date: '',
-                    fundicHeight: '',
-                    fetalHeartTomes: '',
-                    aog: '',
-                    leopolds: '',
-                    lOne: '',
-                    lTwo: '',
-                    lThree: '',
-                    lFour: '',
-                    uterineAcitivty: ''
-                }
-            },
-            remarks: {
-                date: '',
-                fundicHeight: '',
-                fetalHeartTomes: '',
-                aog: '',
-                leopolds: '',
-                lOne: '',
-                lTwo: '',
-                lThree: '',
-                lFour: '',
-                uterineAcitivty: ''
-            }
-        }
+    ...works.FormOneB
+
     }
 
-    const onSubmit = values => {
+    const onSubmit = (values) => {
         console.log('Form data', values)
+        updateUsers2(values)
     }
 
+    async  function updateUsers2(values) {
+
+        const userRef = doc(db, 'client', works.id);
+        const newValues = JSON.parse(JSON.stringify(values))
+        await  updateDoc(userRef,{
+            FormOneB: newValues
+
+        })
+    }
     const { isOpen, onOpen, onClose } = useDisclosure()
     return (
         <>
@@ -228,7 +83,7 @@ export default function FormOneB() {
                                 <FormControl>
                                     {/* <FormHeading text='MATERNAL CLIENT RECORD for Prenatal Care' /> */}
                                     <SimpleGrid
-                                        // columns={{ base: '1', md: '2', xl: '3' }}
+
                                         spacing={4}
                                     >
                                         <Box
@@ -278,34 +133,34 @@ export default function FormOneB() {
                                                 </SimpleGrid>
                                                 <SimpleGrid columns={12} spacingX={3}>
                                                     <GridItem colSpan={2}>
-                                                        <DatePicker label="" name="sideB.records.row1.date" />
-                                                        <DatePicker label="" name="sideB.records.row2.date" />
-                                                        <DatePicker label="" name="sideB.records.row3.date" />
-                                                        <DatePicker label="" name="sideB.records.row4.date" />
+                                                        <DatePicker label="" name="records.row1.date" />
+                                                        <DatePicker label="" name="records.row2.date" />
+                                                        <DatePicker label="" name="records.row3.date" />
+                                                        <DatePicker label="" name="records.row4.date" />
                                                     </GridItem>
                                                     <GridItem colSpan={3}>
-                                                        <TextField label="" name="sideB.records.row1.complaints" />
-                                                        <TextField label="" name="sideB.records.row2.complaints" />
-                                                        <TextField label="" name="sideB.records.row3.complaints" />
-                                                        <TextField label="" name="sideB.records.row4.complaints" />
+                                                        <TextField label="" name="records.row1.complaints" />
+                                                        <TextField label="" name="records.row2.complaints" />
+                                                        <TextField label="" name="records.row3.complaints" />
+                                                        <TextField label="" name="records.row4.complaints" />
                                                     </GridItem>
                                                     <GridItem colSpan={3}>
-                                                        <TextField label="" name="sideB.records.row1.mncServicesGiven" />
-                                                        <TextField label="" name="sideB.records.row2.mncServicesGiven" />
-                                                        <TextField label="" name="sideB.records.row3.mncServicesGiven" />
-                                                        <TextField label="" name="sideB.records.row4.mncServicesGiven" />
+                                                        <TextField label="" name="records.row1.mncServicesGiven" />
+                                                        <TextField label="" name="records.row2.mncServicesGiven" />
+                                                        <TextField label="" name="records.row3.mncServicesGiven" />
+                                                        <TextField label="" name="records.row4.mncServicesGiven" />
                                                     </GridItem>
                                                     <GridItem colSpan={2}>
-                                                        <TextField label="" name="sideB.records.row1.nameOfProviderAndSignature" />
-                                                        <TextField label="" name="sideB.records.row2.nameOfProviderAndSignature" />
-                                                        <TextField label="" name="sideB.records.row3.nameOfProviderAndSignature" />
-                                                        <TextField label="" name="sideB.records.row4.nameOfProviderAndSignature" />
+                                                        <TextField label="" name="records.row1.nameOfProviderAndSignature" />
+                                                        <TextField label="" name="records.row2.nameOfProviderAndSignature" />
+                                                        <TextField label="" name="records.row3.nameOfProviderAndSignature" />
+                                                        <TextField label="" name="records.row4.nameOfProviderAndSignature" />
                                                     </GridItem>
                                                     <GridItem colSpan={2}>
-                                                        <DatePicker label="" name="sideB.records.row1.nextFollowUpSchedule" />
-                                                        <DatePicker label="" name="sideB.records.row2.nextFollowUpSchedule" />
-                                                        <DatePicker label="" name="sideB.records.row3.nextFollowUpSchedule" />
-                                                        <DatePicker label="" name="sideB.records.row4.nextFollowUpSchedule" />
+                                                        <DatePicker label="" name="records.row1.nextFollowUpSchedule" />
+                                                        <DatePicker label="" name="records.row2.nextFollowUpSchedule" />
+                                                        <DatePicker label="" name="records.row3.nextFollowUpSchedule" />
+                                                        <DatePicker label="" name="records.row4.nextFollowUpSchedule" />
                                                     </GridItem>
                                                 </SimpleGrid>
                                             </SimpleGrid>
@@ -339,43 +194,43 @@ export default function FormOneB() {
                                                                     </Center>
                                                                     <TextField
                                                                         label=""
-                                                                        name="sideB.abdominalExamFindings.firstTrimester.firstMonth.date"
+                                                                        name="abdominalExamFindings.firstTrimester.firstMonth.date"
                                                                     />
                                                                     <TextField
                                                                         label=""
-                                                                        name="sideB.abdominalExamFindings.firstTrimester.firstMonth.fundicHeight"
+                                                                        name="abdominalExamFindings.firstTrimester.firstMonth.fundicHeight"
                                                                     />
                                                                     <TextField
                                                                         label=""
-                                                                        name="sideB.abdominalExamFindings.firstTrimester.firstMonth.fetalHeartTomes"
+                                                                        name="abdominalExamFindings.firstTrimester.firstMonth.fetalHeartTomes"
                                                                     />
                                                                     <TextField
                                                                         label=""
-                                                                        name="sideB.abdominalExamFindings.firstTrimester.firstMonth.aog"
+                                                                        name="abdominalExamFindings.firstTrimester.firstMonth.aog"
                                                                     />
                                                                     <TextField
                                                                         label=""
-                                                                        name="sideB.abdominalExamFindings.firstTrimester.firstMonth.leopolds"
+                                                                        name="abdominalExamFindings.firstTrimester.firstMonth.leopolds"
                                                                     />
                                                                     <TextField
                                                                         label=""
-                                                                        name="sideB.abdominalExamFindings.firstTrimester.firstMonth.lOne"
+                                                                        name="abdominalExamFindings.firstTrimester.firstMonth.lOne"
                                                                     />
                                                                     <TextField
                                                                         label=""
-                                                                        name="sideB.abdominalExamFindings.firstTrimester.firstMonth.lTwo"
+                                                                        name="abdominalExamFindings.firstTrimester.firstMonth.lTwo"
                                                                     />
                                                                     <TextField
                                                                         label=""
-                                                                        name="sideB.abdominalExamFindings.firstTrimester.firstMonth.lThree"
+                                                                        name="abdominalExamFindings.firstTrimester.firstMonth.lThree"
                                                                     />
                                                                     <TextField
                                                                         label=""
-                                                                        name="sideB.abdominalExamFindings.firstTrimester.firstMonth.lFour"
+                                                                        name="abdominalExamFindings.firstTrimester.firstMonth.lFour"
                                                                     />
                                                                     <TextField
                                                                         label=""
-                                                                        name="sideB.abdominalExamFindings.firstTrimester.firstMonth.uterineAcitivty"
+                                                                        name="abdominalExamFindings.firstTrimester.firstMonth.uterineAcitivty"
                                                                     />
                                                                 </VStack>
                                                             </GridItem>
@@ -388,43 +243,43 @@ export default function FormOneB() {
                                                                     </Center>
                                                                     <TextField
                                                                         label=""
-                                                                        name="sideB.abdominalExamFindings.firstTrimester.secondMonth.date"
+                                                                        name="abdominalExamFindings.firstTrimester.secondMonth.date"
                                                                     />
                                                                     <TextField
                                                                         label=""
-                                                                        name="sideB.abdominalExamFindings.firstTrimester.secondMonth.fundicHeight"
+                                                                        name="abdominalExamFindings.firstTrimester.secondMonth.fundicHeight"
                                                                     />
                                                                     <TextField
                                                                         label=""
-                                                                        name="sideB.abdominalExamFindings.firstTrimester.secondMonth.fetalHeartTomes"
+                                                                        name="abdominalExamFindings.firstTrimester.secondMonth.fetalHeartTomes"
                                                                     />
                                                                     <TextField
                                                                         label=""
-                                                                        name="sideB.abdominalExamFindings.firstTrimester.secondMonth.aog"
+                                                                        name="abdominalExamFindings.firstTrimester.secondMonth.aog"
                                                                     />
                                                                     <TextField
                                                                         label=""
-                                                                        name="sideB.abdominalExamFindings.firstTrimester.secondMonth.leopolds"
+                                                                        name="abdominalExamFindings.firstTrimester.secondMonth.leopolds"
                                                                     />
                                                                     <TextField
                                                                         label=""
-                                                                        name="sideB.abdominalExamFindings.firstTrimester.secondMonth.lOne"
+                                                                        name="abdominalExamFindings.firstTrimester.secondMonth.lOne"
                                                                     />
                                                                     <TextField
                                                                         label=""
-                                                                        name="sideB.abdominalExamFindings.firstTrimester.secondMonth.lTwo"
+                                                                        name="abdominalExamFindings.firstTrimester.secondMonth.lTwo"
                                                                     />
                                                                     <TextField
                                                                         label=""
-                                                                        name="sideB.abdominalExamFindings.firstTrimester.secondMonth.lThree"
+                                                                        name="abdominalExamFindings.firstTrimester.secondMonth.lThree"
                                                                     />
                                                                     <TextField
                                                                         label=""
-                                                                        name="sideB.abdominalExamFindings.firstTrimester.secondMonth.lFour"
+                                                                        name="abdominalExamFindings.firstTrimester.secondMonth.lFour"
                                                                     />
                                                                     <TextField
                                                                         label=""
-                                                                        name="sideB.abdominalExamFindings.firstTrimester.secondMonth.uterineAcitivty"
+                                                                        name="abdominalExamFindings.firstTrimester.secondMonth.uterineAcitivty"
                                                                     />
                                                                 </VStack>
                                                             </GridItem>
@@ -437,43 +292,43 @@ export default function FormOneB() {
                                                                     </Center>
                                                                     <TextField
                                                                         label=""
-                                                                        name="sideB.abdominalExamFindings.firstTrimester.thirdMonth.date"
+                                                                        name="abdominalExamFindings.firstTrimester.thirdMonth.date"
                                                                     />
                                                                     <TextField
                                                                         label=""
-                                                                        name="sideB.abdominalExamFindings.firstTrimester.thirdMonth.fundicHeight"
+                                                                        name="abdominalExamFindings.firstTrimester.thirdMonth.fundicHeight"
                                                                     />
                                                                     <TextField
                                                                         label=""
-                                                                        name="sideB.abdominalExamFindings.firstTrimester.thirdMonth.fetalHeartTomes"
+                                                                        name="abdominalExamFindings.firstTrimester.thirdMonth.fetalHeartTomes"
                                                                     />
                                                                     <TextField
                                                                         label=""
-                                                                        name="sideB.abdominalExamFindings.firstTrimester.thirdMonth.aog"
+                                                                        name="abdominalExamFindings.firstTrimester.thirdMonth.aog"
                                                                     />
                                                                     <TextField
                                                                         label=""
-                                                                        name="sideB.abdominalExamFindings.firstTrimester.thirdMonth.leopolds"
+                                                                        name="abdominalExamFindings.firstTrimester.thirdMonth.leopolds"
                                                                     />
                                                                     <TextField
                                                                         label=""
-                                                                        name="sideB.abdominalExamFindings.firstTrimester.thirdMonth.lOne"
+                                                                        name="abdominalExamFindings.firstTrimester.thirdMonth.lOne"
                                                                     />
                                                                     <TextField
                                                                         label=""
-                                                                        name="sideB.abdominalExamFindings.firstTrimester.thirdMonth.lTwo"
+                                                                        name="abdominalExamFindings.firstTrimester.thirdMonth.lTwo"
                                                                     />
                                                                     <TextField
                                                                         label=""
-                                                                        name="sideB.abdominalExamFindings.firstTrimester.thirdMonth.lThree"
+                                                                        name="abdominalExamFindings.firstTrimester.thirdMonth.lThree"
                                                                     />
                                                                     <TextField
                                                                         label=""
-                                                                        name="sideB.abdominalExamFindings.firstTrimester.thirdMonth.lFour"
+                                                                        name="abdominalExamFindings.firstTrimester.thirdMonth.lFour"
                                                                     />
                                                                     <TextField
                                                                         label=""
-                                                                        name="sideB.abdominalExamFindings.firstTrimester.thirdMonth.uterineAcitivty"
+                                                                        name="abdominalExamFindings.firstTrimester.thirdMonth.uterineAcitivty"
                                                                     />
                                                                 </VStack>
                                                             </GridItem>
@@ -503,43 +358,43 @@ export default function FormOneB() {
                                                                     </Center>
                                                                     <TextField
                                                                         label=""
-                                                                        name="sideB.abdominalExamFindings.secondTrimester.fourthMonth.date"
+                                                                        name="abdominalExamFindings.secondTrimester.fourthMonth.date"
                                                                     />
                                                                     <TextField
                                                                         label=""
-                                                                        name="sideB.abdominalExamFindings.secondTrimester.fourthMonth.fundicHeight"
+                                                                        name="abdominalExamFindings.secondTrimester.fourthMonth.fundicHeight"
                                                                     />
                                                                     <TextField
                                                                         label=""
-                                                                        name="sideB.abdominalExamFindings.secondTrimester.fourthMonth.fetalHeartTomes"
+                                                                        name="abdominalExamFindings.secondTrimester.fourthMonth.fetalHeartTomes"
                                                                     />
                                                                     <TextField
                                                                         label=""
-                                                                        name="sideB.abdominalExamFindings.secondTrimester.fourthMonth.aog"
+                                                                        name="abdominalExamFindings.secondTrimester.fourthMonth.aog"
                                                                     />
                                                                     <TextField
                                                                         label=""
-                                                                        name="sideB.abdominalExamFindings.secondTrimester.fourthMonth.leopolds"
+                                                                        name="abdominalExamFindings.secondTrimester.fourthMonth.leopolds"
                                                                     />
                                                                     <TextField
                                                                         label=""
-                                                                        name="sideB.abdominalExamFindings.secondTrimester.fourthMonth.lOne"
+                                                                        name="abdominalExamFindings.secondTrimester.fourthMonth.lOne"
                                                                     />
                                                                     <TextField
                                                                         label=""
-                                                                        name="sideB.abdominalExamFindings.secondTrimester.fourthMonth.lTwo"
+                                                                        name="abdominalExamFindings.secondTrimester.fourthMonth.lTwo"
                                                                     />
                                                                     <TextField
                                                                         label=""
-                                                                        name="sideB.abdominalExamFindings.secondTrimester.fourthMonth.lThree"
+                                                                        name="abdominalExamFindings.secondTrimester.fourthMonth.lThree"
                                                                     />
                                                                     <TextField
                                                                         label=""
-                                                                        name="sideB.abdominalExamFindings.secondTrimester.fourthMonth.lFour"
+                                                                        name="abdominalExamFindings.secondTrimester.fourthMonth.lFour"
                                                                     />
                                                                     <TextField
                                                                         label=""
-                                                                        name="sideB.abdominalExamFindings.secondTrimester.fourthMonth.uterineAcitivty"
+                                                                        name="abdominalExamFindings.secondTrimester.fourthMonth.uterineAcitivty"
                                                                     />
                                                                 </VStack>
                                                             </GridItem>
@@ -552,43 +407,43 @@ export default function FormOneB() {
                                                                     </Center>
                                                                     <TextField
                                                                         label=""
-                                                                        name="sideB.abdominalExamFindings.secondTrimester.fifthMonth.date"
+                                                                        name="abdominalExamFindings.secondTrimester.fifthMonth.date"
                                                                     />
                                                                     <TextField
                                                                         label=""
-                                                                        name="sideB.abdominalExamFindings.secondTrimester.fifthMonth.fundicHeight"
+                                                                        name="abdominalExamFindings.secondTrimester.fifthMonth.fundicHeight"
                                                                     />
                                                                     <TextField
                                                                         label=""
-                                                                        name="sideB.abdominalExamFindings.secondTrimester.fifthMonth.fetalHeartTomes"
+                                                                        name="abdominalExamFindings.secondTrimester.fifthMonth.fetalHeartTomes"
                                                                     />
                                                                     <TextField
                                                                         label=""
-                                                                        name="sideB.abdominalExamFindings.secondTrimester.fifthMonth.aog"
+                                                                        name="abdominalExamFindings.secondTrimester.fifthMonth.aog"
                                                                     />
                                                                     <TextField
                                                                         label=""
-                                                                        name="sideB.abdominalExamFindings.secondTrimester.fifthMonth.leopolds"
+                                                                        name="abdominalExamFindings.secondTrimester.fifthMonth.leopolds"
                                                                     />
                                                                     <TextField
                                                                         label=""
-                                                                        name="sideB.abdominalExamFindings.secondTrimester.fifthMonth.lOne"
+                                                                        name="abdominalExamFindings.secondTrimester.fifthMonth.lOne"
                                                                     />
                                                                     <TextField
                                                                         label=""
-                                                                        name="sideB.abdominalExamFindings.secondTrimester.fifthMonth.lTwo"
+                                                                        name="abdominalExamFindings.secondTrimester.fifthMonth.lTwo"
                                                                     />
                                                                     <TextField
                                                                         label=""
-                                                                        name="sideB.abdominalExamFindings.secondTrimester.fifthMonth.lThree"
+                                                                        name="abdominalExamFindings.secondTrimester.fifthMonth.lThree"
                                                                     />
                                                                     <TextField
                                                                         label=""
-                                                                        name="sideB.abdominalExamFindings.secondTrimester.fifthMonth.lFour"
+                                                                        name="abdominalExamFindings.secondTrimester.fifthMonth.lFour"
                                                                     />
                                                                     <TextField
                                                                         label=""
-                                                                        name="sideB.abdominalExamFindings.secondTrimester.fifthMonth.uterineAcitivty"
+                                                                        name="abdominalExamFindings.secondTrimester.fifthMonth.uterineAcitivty"
                                                                     />
                                                                 </VStack>
                                                             </GridItem>
@@ -601,43 +456,43 @@ export default function FormOneB() {
                                                                     </Center>
                                                                     <TextField
                                                                         label=""
-                                                                        name="sideB.abdominalExamFindings.secondTrimester.sixthMonth.date"
+                                                                        name="abdominalExamFindings.secondTrimester.sixthMonth.date"
                                                                     />
                                                                     <TextField
                                                                         label=""
-                                                                        name="sideB.abdominalExamFindings.secondTrimester.sixthMonth.fundicHeight"
+                                                                        name="abdominalExamFindings.secondTrimester.sixthMonth.fundicHeight"
                                                                     />
                                                                     <TextField
                                                                         label=""
-                                                                        name="sideB.abdominalExamFindings.secondTrimester.sixthMonth.fetalHeartTomes"
+                                                                        name="abdominalExamFindings.secondTrimester.sixthMonth.fetalHeartTomes"
                                                                     />
                                                                     <TextField
                                                                         label=""
-                                                                        name="sideB.abdominalExamFindings.secondTrimester.sixthMonth.aog"
+                                                                        name="abdominalExamFindings.secondTrimester.sixthMonth.aog"
                                                                     />
                                                                     <TextField
                                                                         label=""
-                                                                        name="sideB.abdominalExamFindings.secondTrimester.sixthMonth.leopolds"
+                                                                        name="abdominalExamFindings.secondTrimester.sixthMonth.leopolds"
                                                                     />
                                                                     <TextField
                                                                         label=""
-                                                                        name="sideB.abdominalExamFindings.secondTrimester.sixthMonth.lOne"
+                                                                        name="abdominalExamFindings.secondTrimester.sixthMonth.lOne"
                                                                     />
                                                                     <TextField
                                                                         label=""
-                                                                        name="sideB.abdominalExamFindings.secondTrimester.sixthMonth.lTwo"
+                                                                        name="abdominalExamFindings.secondTrimester.sixthMonth.lTwo"
                                                                     />
                                                                     <TextField
                                                                         label=""
-                                                                        name="sideB.abdominalExamFindings.secondTrimester.sixthMonth.lThree"
+                                                                        name="abdominalExamFindings.secondTrimester.sixthMonth.lThree"
                                                                     />
                                                                     <TextField
                                                                         label=""
-                                                                        name="sideB.abdominalExamFindings.secondTrimester.sixthMonth.lFour"
+                                                                        name="abdominalExamFindings.secondTrimester.sixthMonth.lFour"
                                                                     />
                                                                     <TextField
                                                                         label=""
-                                                                        name="sideB.abdominalExamFindings.secondTrimester.sixthMonth.uterineAcitivty"
+                                                                        name="abdominalExamFindings.secondTrimester.sixthMonth.uterineAcitivty"
                                                                     />
                                                                 </VStack>
                                                             </GridItem>
@@ -667,43 +522,43 @@ export default function FormOneB() {
                                                                     </Center>
                                                                     <TextField
                                                                         label=""
-                                                                        name="sideB.abdominalExamFindings.thirdTrimester.seventhMonth.date"
+                                                                        name="abdominalExamFindings.thirdTrimester.seventhMonth.date"
                                                                     />
                                                                     <TextField
                                                                         label=""
-                                                                        name="sideB.abdominalExamFindings.thirdTrimester.seventhMonth.fundicHeight"
+                                                                        name="abdominalExamFindings.thirdTrimester.seventhMonth.fundicHeight"
                                                                     />
                                                                     <TextField
                                                                         label=""
-                                                                        name="sideB.abdominalExamFindings.thirdTrimester.seventhMonth.fetalHeartTomes"
+                                                                        name="abdominalExamFindings.thirdTrimester.seventhMonth.fetalHeartTomes"
                                                                     />
                                                                     <TextField
                                                                         label=""
-                                                                        name="sideB.abdominalExamFindings.thirdTrimester.seventhMonth.aog"
+                                                                        name="abdominalExamFindings.thirdTrimester.seventhMonth.aog"
                                                                     />
                                                                     <TextField
                                                                         label=""
-                                                                        name="sideB.abdominalExamFindings.thirdTrimester.seventhMonth.leopolds"
+                                                                        name="abdominalExamFindings.thirdTrimester.seventhMonth.leopolds"
                                                                     />
                                                                     <TextField
                                                                         label=""
-                                                                        name="sideB.abdominalExamFindings.thirdTrimester.seventhMonth.lOne"
+                                                                        name="abdominalExamFindings.thirdTrimester.seventhMonth.lOne"
                                                                     />
                                                                     <TextField
                                                                         label=""
-                                                                        name="sideB.abdominalExamFindings.thirdTrimester.seventhMonth.lTwo"
+                                                                        name="abdominalExamFindings.thirdTrimester.seventhMonth.lTwo"
                                                                     />
                                                                     <TextField
                                                                         label=""
-                                                                        name="sideB.abdominalExamFindings.thirdTrimester.seventhMonth.lThree"
+                                                                        name="abdominalExamFindings.thirdTrimester.seventhMonth.lThree"
                                                                     />
                                                                     <TextField
                                                                         label=""
-                                                                        name="sideB.abdominalExamFindings.thirdTrimester.seventhMonth.lFour"
+                                                                        name="abdominalExamFindings.thirdTrimester.seventhMonth.lFour"
                                                                     />
                                                                     <TextField
                                                                         label=""
-                                                                        name="sideB.abdominalExamFindings.thirdTrimester.seventhMonth.uterineAcitivty"
+                                                                        name="abdominalExamFindings.thirdTrimester.seventhMonth.uterineAcitivty"
                                                                     />
                                                                 </VStack>
                                                             </GridItem>
@@ -716,43 +571,43 @@ export default function FormOneB() {
                                                                     </Center>
                                                                     <TextField
                                                                         label=""
-                                                                        name="sideB.abdominalExamFindings.thirdTrimester.eightMonth.date"
+                                                                        name="abdominalExamFindings.thirdTrimester.eightMonth.date"
                                                                     />
                                                                     <TextField
                                                                         label=""
-                                                                        name="sideB.abdominalExamFindings.thirdTrimester.eightMonth.fundicHeight"
+                                                                        name="abdominalExamFindings.thirdTrimester.eightMonth.fundicHeight"
                                                                     />
                                                                     <TextField
                                                                         label=""
-                                                                        name="sideB.abdominalExamFindings.thirdTrimester.eightMonth.fetalHeartTomes"
+                                                                        name="abdominalExamFindings.thirdTrimester.eightMonth.fetalHeartTomes"
                                                                     />
                                                                     <TextField
                                                                         label=""
-                                                                        name="sideB.abdominalExamFindings.thirdTrimester.eightMonth.aog"
+                                                                        name="abdominalExamFindings.thirdTrimester.eightMonth.aog"
                                                                     />
                                                                     <TextField
                                                                         label=""
-                                                                        name="sideB.abdominalExamFindings.thirdTrimester.eightMonth.leopolds"
+                                                                        name="abdominalExamFindings.thirdTrimester.eightMonth.leopolds"
                                                                     />
                                                                     <TextField
                                                                         label=""
-                                                                        name="sideB.abdominalExamFindings.thirdTrimester.eightMonth.lOne"
+                                                                        name="abdominalExamFindings.thirdTrimester.eightMonth.lOne"
                                                                     />
                                                                     <TextField
                                                                         label=""
-                                                                        name="sideB.abdominalExamFindings.thirdTrimester.eightMonth.lTwo"
+                                                                        name="abdominalExamFindings.thirdTrimester.eightMonth.lTwo"
                                                                     />
                                                                     <TextField
                                                                         label=""
-                                                                        name="sideB.abdominalExamFindings.thirdTrimester.eightMonth.lThree"
+                                                                        name="abdominalExamFindings.thirdTrimester.eightMonth.lThree"
                                                                     />
                                                                     <TextField
                                                                         label=""
-                                                                        name="sideB.abdominalExamFindings.thirdTrimester.eightMonth.lFour"
+                                                                        name="abdominalExamFindings.thirdTrimester.eightMonth.lFour"
                                                                     />
                                                                     <TextField
                                                                         label=""
-                                                                        name="sideB.abdominalExamFindings.thirdTrimester.eightMonth.uterineAcitivty"
+                                                                        name="abdominalExamFindings.thirdTrimester.eightMonth.uterineAcitivty"
                                                                     />
                                                                 </VStack>
                                                             </GridItem>
@@ -765,43 +620,43 @@ export default function FormOneB() {
                                                                     </Center>
                                                                     <TextField
                                                                         label=""
-                                                                        name="sideB.abdominalExamFindings.thirdTrimester.ninethMonth.date"
+                                                                        name="abdominalExamFindings.thirdTrimester.ninethMonth.date"
                                                                     />
                                                                     <TextField
                                                                         label=""
-                                                                        name="sideB.abdominalExamFindings.thirdTrimester.ninethMonth.fundicHeight"
+                                                                        name="abdominalExamFindings.thirdTrimester.ninethMonth.fundicHeight"
                                                                     />
                                                                     <TextField
                                                                         label=""
-                                                                        name="sideB.abdominalExamFindings.thirdTrimester.ninethMonth.fetalHeartTomes"
+                                                                        name="abdominalExamFindings.thirdTrimester.ninethMonth.fetalHeartTomes"
                                                                     />
                                                                     <TextField
                                                                         label=""
-                                                                        name="sideB.abdominalExamFindings.thirdTrimester.ninethMonth.aog"
+                                                                        name="abdominalExamFindings.thirdTrimester.ninethMonth.aog"
                                                                     />
                                                                     <TextField
                                                                         label=""
-                                                                        name="sideB.abdominalExamFindings.thirdTrimester.ninethMonth.leopolds"
+                                                                        name="abdominalExamFindings.thirdTrimester.ninethMonth.leopolds"
                                                                     />
                                                                     <TextField
                                                                         label=""
-                                                                        name="sideB.abdominalExamFindings.thirdTrimester.ninethMonth.lOne"
+                                                                        name="abdominalExamFindings.thirdTrimester.ninethMonth.lOne"
                                                                     />
                                                                     <TextField
                                                                         label=""
-                                                                        name="sideB.abdominalExamFindings.thirdTrimester.ninethMonth.lTwo"
+                                                                        name="abdominalExamFindings.thirdTrimester.ninethMonth.lTwo"
                                                                     />
                                                                     <TextField
                                                                         label=""
-                                                                        name="sideB.abdominalExamFindings.thirdTrimester.ninethMonth.lThree"
+                                                                        name="abdominalExamFindings.thirdTrimester.ninethMonth.lThree"
                                                                     />
                                                                     <TextField
                                                                         label=""
-                                                                        name="sideB.abdominalExamFindings.thirdTrimester.ninethMonth.lFour"
+                                                                        name="abdominalExamFindings.thirdTrimester.ninethMonth.lFour"
                                                                     />
                                                                     <TextField
                                                                         label=""
-                                                                        name="sideB.abdominalExamFindings.thirdTrimester.ninethMonth.uterineAcitivty"
+                                                                        name="abdominalExamFindings.thirdTrimester.ninethMonth.uterineAcitivty"
                                                                     />
                                                                 </VStack>
                                                             </GridItem>
@@ -826,43 +681,43 @@ export default function FormOneB() {
                                                                 <VStack spacing='3px'>
                                                                     <TextField
                                                                         label=""
-                                                                        name="sideB.abdominalExamFindings.remarks.date"
+                                                                        name="abdominalExamFindings.remarks.date"
                                                                     />
                                                                     <TextField
                                                                         label=""
-                                                                        name="sideB.abdominalExamFindings.remarks.fundicHeight"
+                                                                        name="abdominalExamFindings.remarks.fundicHeight"
                                                                     />
                                                                     <TextField
                                                                         label=""
-                                                                        name="sideB.abdominalExamFindings.remarks.fetalHeartTomes"
+                                                                        name="abdominalExamFindings.remarks.fetalHeartTomes"
                                                                     />
                                                                     <TextField
                                                                         label=""
-                                                                        name="sideB.abdominalExamFindings.remarks.aog"
+                                                                        name="abdominalExamFindings.remarks.aog"
                                                                     />
                                                                     <TextField
                                                                         label=""
-                                                                        name="sideB.abdominalExamFindings.remarks.leopolds"
+                                                                        name="abdominalExamFindings.remarks.leopolds"
                                                                     />
                                                                     <TextField
                                                                         label=""
-                                                                        name="sideB.abdominalExamFindings.remarks.lOne"
+                                                                        name="abdominalExamFindings.remarks.lOne"
                                                                     />
                                                                     <TextField
                                                                         label=""
-                                                                        name="sideB.abdominalExamFindings.remarks.lTwo"
+                                                                        name="abdominalExamFindings.remarks.lTwo"
                                                                     />
                                                                     <TextField
                                                                         label=""
-                                                                        name="sideB.abdominalExamFindings.remarks.lThree"
+                                                                        name="abdominalExamFindings.remarks.lThree"
                                                                     />
                                                                     <TextField
                                                                         label=""
-                                                                        name="sideB.abdominalExamFindings.remarks.lFour"
+                                                                        name="abdominalExamFindings.remarks.lFour"
                                                                     />
                                                                     <TextField
                                                                         label=""
-                                                                        name="sideB.abdominalExamFindings.remarks.uterineAcitivty"
+                                                                        name="abdominalExamFindings.remarks.uterineAcitivty"
                                                                     />
                                                                 </VStack>
                                                             </GridItem>
@@ -873,6 +728,7 @@ export default function FormOneB() {
                                         </Box>
                                     </SimpleGrid>
                                 </FormControl>
+
                             </ModalBody>
                             <ModalFooter>
                                 <Button margin={5} type="submit" colorScheme='green'>Submit</Button>

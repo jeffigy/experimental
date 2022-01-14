@@ -51,6 +51,7 @@ export default function AppRouter(props) {
 
 function ProtectedRoute(props) {
   const { currentUser } = useAuth()
+
   const { path } = props
   const location = useLocation()
 

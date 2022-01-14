@@ -3,9 +3,7 @@ import {
     Spacer,
     HStack,
     Heading,
-    Box,
     Input,
-    Link, Tooltip, Button, Text
 } from '@chakra-ui/react'
 import { Layout } from '../../components/Layout'
 import React, { useEffect, useState, useMemo } from 'react'
@@ -15,12 +13,11 @@ import ViewClient from "./ViewClient";
 import UpdateClient from "./UpdateClient";
 import Create from "./Create";
 import DataTable from "react-data-table-component";
-import { EditIcon } from '@chakra-ui/icons'
+
 
 export default function IndexClient() {
     const [filterText, setFilterText] = useState("");
     const [targetClient, setTargetClient] = useState([]);
-
     const Data = () => {
         const usersCollectionRef = collection(db, "client");
         onSnapshot(usersCollectionRef, (snapshot) => {
@@ -89,23 +86,25 @@ export default function IndexClient() {
                 responsive
                 striped
                 columns={columns}
-                data={targetClient.filter((value) => {
+                data={
+                    targetClient.filter((value) => {
                     if (filterText === "") {
                         return value;
                     } else if (
-                        value.first
+                        value.first && value.last
                             .toLowerCase()
                             .includes(filterText.toLowerCase())
                     ) {
                         return value;
                     } else if (
-                        value.last
+                        value.last && value.last
                             .toLowerCase()
                             .includes(filterText.toLowerCase())
                     ) {
                         return value;
                     }
-                })}
+                })
+                }
 
             />
         </Layout>
