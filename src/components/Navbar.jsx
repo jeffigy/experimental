@@ -1,4 +1,4 @@
-import { Box, Button, Menu, MenuButton, VStack,  MenuItem, useBreakpointValue, Collapse, IconButton, useDisclosure, Text, Stack,  Flex, MenuList } from '@chakra-ui/react'
+import { Box, Button, Menu, MenuButton, VStack, MenuItem, useBreakpointValue, Collapse, IconButton, useDisclosure, Text, Stack, Flex, MenuList } from '@chakra-ui/react'
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { useAuth } from '../contexts/AuthContext'
@@ -34,13 +34,15 @@ const Navbar = () => {
           />
         </Flex>
         <Flex flex={{ base: 1 }} justify={{ base: "center", md: "start" }}>
-          <Text
-            textAlign={useBreakpointValue({ base: "center", md: "left" })}
-            fontFamily={"heading"}
-            fontWeight="600"
-          >
-            FHSIS
-          </Text>
+          <Link to='/'>
+            <Text
+              textAlign={useBreakpointValue({ base: "center", md: "left" })}
+              fontFamily={"heading"}
+              fontWeight="600"
+            >
+              FHSIS
+            </Text>
+          </Link>
           <Flex display={{ base: "none", md: "flex" }} ml={10}>
             <DesktopNav />
           </Flex>

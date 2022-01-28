@@ -9,15 +9,18 @@ import {
     ModalCloseButton,
     Button,
     useDisclosure,
-    Tooltip
+    Tooltip,
+    Text, Heading
 } from '@chakra-ui/react'
-import React from 'react'
+import React, {useState} from 'react'
 import { ViewIcon } from '@chakra-ui/icons'
+import DisplayField from '../components/Fields/DisplayField'
+
 
 
 
 export default function ViewPatient({ works }) {
-    const obj = { works }
+    const [data, setData] = useState([works]);
 
     const { isOpen, onOpen, onClose } = useDisclosure()
     return (
@@ -33,17 +36,22 @@ export default function ViewPatient({ works }) {
                     <ViewIcon />
                 </Button>
             </Tooltip>
-            <Modal isOpen={isOpen} onClose={onClose}>
+            <Modal isOpen={isOpen} onClose={onClose} size="xl">
                 <ModalOverlay />
                 <ModalContent>
-                    <ModalHeader>Modal Title</ModalHeader>
+                    <ModalHeader>Client Details</ModalHeader>
                     <ModalCloseButton />
                     <ModalBody>
-                        <div>
-                            <h1>{JSON.stringify(obj)}</h1>
-                        </div>
+                        
 
-
+                        {data.map(obj => (
+                            <>
+                                <Heading as='h4' size='md' color='grey'>
+                                    Name
+                                </Heading>
+                                <Text fontSize='md'>{obj.first}</Text>         
+                            </>
+                        ))}
                     </ModalBody>
 
                     <ModalFooter>

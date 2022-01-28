@@ -440,7 +440,7 @@ export default function FormOneA({works}) {
                                                     />
                                                 </Box>
                                             </SimpleGrid>
-                                            <SimpleGrid pt={2}>
+                                            <SimpleGrid pt={5}>
                                                 <Divider orientation='horizontal' />
                                                 <Text fontSize='xl'>Impression/Diagnosis:</Text>
                                                 <Divider orientation='horizontal' />
@@ -448,6 +448,17 @@ export default function FormOneA({works}) {
                                                     <TextField
                                                         label="Impression/Diagnosis"
                                                         name="physicalExamination.impressionDiagnosis"
+                                                    />
+                                                </Box>
+                                            </SimpleGrid>
+                                            <SimpleGrid pt={5}>
+                                                <Divider orientation='horizontal' />
+                                                <Text fontSize='xl'>LMP/G-P</Text>
+                                                <Divider orientation='horizontal' />
+                                                <Box>
+                                                    <DatePicker
+                                                        label="LMP/G-P"
+                                                        name="physicalExamination.lmp"
                                                     />
                                                 </Box>
                                             </SimpleGrid>

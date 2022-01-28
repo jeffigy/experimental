@@ -1,12 +1,12 @@
 import React from 'react'
 import {
-    Drawer,
-    DrawerBody,
-    DrawerFooter,
-    DrawerHeader,
-    DrawerOverlay,
-    DrawerContent,
-    DrawerCloseButton,
+    Modal,
+    ModalBody,
+    ModalFooter,
+    ModalHeader,
+    ModalOverlay,
+    ModalContent,
+    ModalCloseButton,
     useDisclosure,
     Button,
     Input,
@@ -16,6 +16,7 @@ import {
     Stack,
     NumberInput,
     NumberInputField,
+    Box
 } from '@chakra-ui/react'
 import {
     legislativeDistrictOptions,
@@ -39,18 +40,22 @@ export default function Create() {
 
 
     async function createClient(values) {
+        const today = new Date();
+        const tomorrow = new Date()
+        const edc = tomorrow.setDate(today.getDate() + 227)
 
         const usersCollectionRef = collection(db, "client");
         await addDoc(usersCollectionRef,
             {
-            first: values.firstname,
-            middle: values.middlename,
-            last: values.lastname,
-            administrativeDistrict: values.administrativeDistrict,
-            legislativeDistrict: values.legislativeDistrict,
-            barangay: values.barangay,
-            age: values.age,
-                FormTwoA:{
+                edc: new Date(edc),
+                first: values.firstname,
+                middle: values.middlename,
+                last: values.lastname,
+                administrativeDistrict: values.administrativeDistrict,
+                legislativeDistrict: values.legislativeDistrict,
+                barangay: values.barangay,
+                age: values.age,
+                FormTwoA: {
                     dateOfVisit: new Date(),
                     physicalExamination: {
                         dateOfDelivery: '',
@@ -148,39 +153,42 @@ export default function Create() {
                         }
                     },
                 },
-                FormTwoB:    {records: {
-            row1: {
-                date: new Date(),
-                    complaints: '',
-                    mncServicesGiven: '',
-                    nameOfProviderAndSignature: '',
-                    nextFollowUpSchedule: new Date()
-            },
-            row2: {
-                date: new Date(),
-                    complaints: '',
-                    mncServicesGiven: '',
-                    nameOfProviderAndSignature: '',
-                    nextFollowUpSchedule: new Date()
-            },
-            row3: {
-                date: new Date(),
-                    complaints: '',
-                    mncServicesGiven: '',
-                    nameOfProviderAndSignature: '',
-                    nextFollowUpSchedule: new Date()
-            },
-            row4: {
-                date: new Date(),
-                    complaints: '',
-                    mncServicesGiven: '',
-                    nameOfProviderAndSignature: '',
-                    nextFollowUpSchedule: new Date()
-            }
-        }},
-                FormOneA:{ familySerial: {
+                FormTwoB: {
+                    records: {
+                        row1: {
+                            date: new Date(),
+                            complaints: '',
+                            mncServicesGiven: '',
+                            nameOfProviderAndSignature: '',
+                            nextFollowUpSchedule: new Date()
+                        },
+                        row2: {
+                            date: new Date(),
+                            complaints: '',
+                            mncServicesGiven: '',
+                            nameOfProviderAndSignature: '',
+                            nextFollowUpSchedule: new Date()
+                        },
+                        row3: {
+                            date: new Date(),
+                            complaints: '',
+                            mncServicesGiven: '',
+                            nameOfProviderAndSignature: '',
+                            nextFollowUpSchedule: new Date()
+                        },
+                        row4: {
+                            date: new Date(),
+                            complaints: '',
+                            mncServicesGiven: '',
+                            nameOfProviderAndSignature: '',
+                            nextFollowUpSchedule: new Date()
+                        }
+                    }
+                },
+                FormOneA: {
+                    familySerial: {
                         client: {
-                            birthday:        new Date(),
+                            birthday: new Date(),
                             highestEducation: '',
                             occupation: '',
                             addressStreet: '',
@@ -192,7 +200,7 @@ export default function Create() {
                             firstName: '',
                             middleName: '',
                             lastName: '',
-                            birthday:        new Date(),
+                            birthday: new Date(),
                             highestEducation: '',
                             occupation: ''
                         },
@@ -236,43 +244,45 @@ export default function Create() {
                         vaginalExamination: '',
                         extremities: '',
                         toxoidVaccineStatus: '',
-                        impressionDiagnosis: ''
+                        impressionDiagnosis: '',
+                        lmp: new Date()
                     }
                 },
-                FormOneB:{    records: {
+                FormOneB: {
+                    records: {
                         row1: {
-                            date:    new Date(),
+                            date: new Date(),
                             complaints: '',
                             mncServicesGiven: '',
                             nameOfProviderAndSignature: '',
-                            nextFollowUpSchedule:    new Date()
+                            nextFollowUpSchedule: new Date()
                         },
                         row2: {
-                            date:    new Date(),
+                            date: new Date(),
                             complaints: '',
                             mncServicesGiven: '',
                             nameOfProviderAndSignature: '',
-                            nextFollowUpSchedule:    new Date()
+                            nextFollowUpSchedule: new Date()
                         },
                         row3: {
-                            date:    new Date(),
+                            date: new Date(),
                             complaints: '',
                             mncServicesGiven: '',
                             nameOfProviderAndSignature: '',
-                            nextFollowUpSchedule:    new Date()
+                            nextFollowUpSchedule: new Date()
                         },
                         row4: {
-                            date:    new Date(),
+                            date: new Date(),
                             complaints: '',
                             mncServicesGiven: '',
                             nameOfProviderAndSignature: '',
-                            nextFollowUpSchedule:    new Date()
+                            nextFollowUpSchedule: new Date()
                         }
                     },
                     abdominalExamFindings: {
                         firstTrimester: {
                             firstMonth: {
-                                date:    new Date(),
+                                date: new Date(),
                                 fundicHeight: '',
                                 fetalHeartTomes: '',
                                 aog: '',
@@ -284,7 +294,7 @@ export default function Create() {
                                 uterineAcitivty: ''
                             },
                             secondMonth: {
-                                date:    new Date(),
+                                date: new Date(),
                                 fundicHeight: '',
                                 fetalHeartTomes: '',
                                 aog: '',
@@ -296,7 +306,7 @@ export default function Create() {
                                 uterineAcitivty: ''
                             },
                             thirdMonth: {
-                                date:    new Date(),
+                                date: new Date(),
                                 fundicHeight: '',
                                 fetalHeartTomes: '',
                                 aog: '',
@@ -311,7 +321,7 @@ export default function Create() {
                         },
                         secondTrimester: {
                             fourthMonth: {
-                                date:    new Date(),
+                                date: new Date(),
                                 fetalHeartTomes: '',
                                 aog: '',
                                 leopolds: '',
@@ -322,7 +332,7 @@ export default function Create() {
                                 uterineAcitivty: ''
                             },
                             fifthMonth: {
-                                date:    new Date(),
+                                date: new Date(),
                                 fundicHeight: '',
                                 fetalHeartTomes: '',
                                 aog: '',
@@ -334,7 +344,7 @@ export default function Create() {
                                 uterineAcitivty: ''
                             },
                             sixthMonth: {
-                                date:    new Date(),
+                                date: new Date(),
                                 fundicHeight: '',
                                 fetalHeartTomes: '',
                                 aog: '',
@@ -348,7 +358,7 @@ export default function Create() {
                         },
                         thirdTrimester: {
                             seventhMonth: {
-                                date:    new Date(),
+                                date: new Date(),
                                 fundicHeight: '',
                                 fetalHeartTomes: '',
                                 aog: '',
@@ -360,7 +370,7 @@ export default function Create() {
                                 uterineAcitivty: ''
                             },
                             eightMonth: {
-                                date:    new Date(),
+                                date: new Date(),
                                 fundicHeight: '',
                                 fetalHeartTomes: '',
                                 aog: '',
@@ -372,7 +382,7 @@ export default function Create() {
                                 uterineAcitivty: ''
                             },
                             ninethMonth: {
-                                date:    new Date(),
+                                date: new Date(),
                                 fundicHeight: '',
                                 fetalHeartTomes: '',
                                 aog: '',
@@ -385,7 +395,7 @@ export default function Create() {
                             }
                         },
                         remarks: {
-                            date:    new Date(),
+                            date: new Date(),
                             fundicHeight: '',
                             fetalHeartTomes: '',
                             aog: '',
@@ -396,8 +406,10 @@ export default function Create() {
                             lFour: '',
                             uterineAcitivty: ''
                         }
-                    }},
-                BirthPlan:{  attendantName: '',
+                    }
+                },
+                BirthPlan: {
+                    attendantName: '',
                     deliveryLocation: '',
                     accredationStatus: '',
                     distanceFromResidence: '',
@@ -444,10 +456,11 @@ export default function Create() {
                     },
                     conforme: {
                         signature: '',
-                        date:   new Date()
-                    }}
+                        date: new Date()
+                    }
+                }
 
-        }
+            }
         );
 
     }
@@ -464,137 +477,149 @@ export default function Create() {
     return (
         <>
             <Button ref={btnRef} colorScheme='green' onClick={onOpen}>
-                {/* Add New Record */}<AddIcon />
+                <AddIcon />
             </Button>
-            <Drawer
+            <Modal
                 isOpen={isOpen}
                 placement='right'
                 initialFocusRef={firstField}
                 onClose={onClose}
+                size="xl"
             >
-                <DrawerOverlay />
-                <DrawerContent>
-                    <DrawerCloseButton />
-                    <DrawerHeader borderBottomWidth='1px'>
+                <ModalOverlay />
+                <ModalContent>
+                    <ModalCloseButton />
+                    <ModalHeader borderBottomWidth='1px'>
                         Add New Client
-                    </DrawerHeader>
+                    </ModalHeader>
 
-                    <DrawerBody>
-                        <Stack spacing='24px'>
-                            <Formik
-                                initialValues={{
+                    <Formik
+                        initialValues={{
 
-                                }}
-                                onSubmit={(values, actions) => {
-                                    createClient(values)
+                        }}
+                        onSubmit={(values, actions) => {
+                            createClient(values)
 
-                                        .then(() => {
-                                            toast({
-                                                title: 'Success',
-                                                description: 'User created successfully',
-                                                status: 'success',
-                                                duration: 9000,
-                                                isClosable: true,
-                                            })
-                                            actions.setSubmitting(false)
-                                            onClose()
-                                        })
-                                        .catch(err => {
-                                            toast({
-                                                title: 'Error',
-                                                description: err.message,
-                                                status: 'error',
-                                                duration: 9000,
-                                                isClosable: true,
-                                            })
-                                            actions.setSubmitting(false)
-                                        })
+                                .then(() => {
+                                    toast({
+                                        title: 'Success',
+                                        description: 'User created successfully',
+                                        status: 'success',
+                                        duration: 9000,
+                                        isClosable: true,
+                                    })
+                                    actions.setSubmitting(false)
+                                    onClose()
+                                })
+                                .catch(err => {
+                                    toast({
+                                        title: 'Error',
+                                        description: err.message,
+                                        status: 'error',
+                                        duration: 9000,
+                                        isClosable: true,
+                                    })
+                                    actions.setSubmitting(false)
+                                })
 
-                                }}
-                            >
-                                {(props) => (
-                                    <Form>
-                                        <Field name='firstname' >
-                                            {({ field, form }) => (
-                                                <FormControl isInvalid={form.errors.firstname && form.touched.firstname}>
-                                                    <FormLabel htmlFor='firstname'>First Name</FormLabel>
-                                                    <Input {...field} id='firstname' placeholder='firstname' />
-                                                    <FormErrorMessage>{form.errors.firstname}</FormErrorMessage>
-                                                </FormControl>
-                                            )}
-                                        </Field>
-                                        <Field name='middlename' >
-                                            {({ field, form }) => (
-                                                <FormControl isInvalid={form.errors.middlename && form.touched.middlename}>
-                                                    <FormLabel htmlFor='middlename'>Middle Name </FormLabel>
-                                                    <Input {...field} id='middlename' placeholder='middlename' />
-                                                    <FormErrorMessage>{form.errors.middlename}</FormErrorMessage>
-                                                </FormControl>
-                                            )}
-                                        </Field>
-                                        <Field name='lastname' >
-                                            {({ field, form }) => (
-                                                <FormControl isInvalid={form.errors.lastname && form.touched.lastname}>
-                                                    <FormLabel htmlFor='lastname'>Last Name</FormLabel>
-                                                    <Input {...field} id='lastname' placeholder='lastname' />
-                                                    <FormErrorMessage>{form.errors.lastname}</FormErrorMessage>
-                                                </FormControl>
-                                            )}
-                                        </Field>
-                                        <Select
-                                            label="Legislative District"
-                                            name="legislativeDistrict"
-                                            options={legislativeDistrictOptions}
-                                        />
+                        }}
+                    >
+                        {(props) => (
+                            <Form>
+                                <ModalBody>
+                                    <Stack spacing={4}>
+                                        <Box>
+                                            <Field name='firstname' >
+                                                {({ field, form }) => (
+                                                    <FormControl isInvalid={form.errors.firstname && form.touched.firstname}>
+                                                        <FormLabel htmlFor='firstname'>First Name</FormLabel>
+                                                        <Input {...field} id='firstname' />
+                                                        <FormErrorMessage>{form.errors.firstname}</FormErrorMessage>
+                                                    </FormControl>
+                                                )}
+                                            </Field>
+                                        </Box>
+                                        <Box>
+                                            <Field name='middlename' >
+                                                {({ field, form }) => (
+                                                    <FormControl isInvalid={form.errors.middlename && form.touched.middlename}>
+                                                        <FormLabel htmlFor='middlename'>Middle Name </FormLabel>
+                                                        <Input {...field} id='middlename' />
+                                                        <FormErrorMessage>{form.errors.middlename}</FormErrorMessage>
+                                                    </FormControl>
+                                                )}
+                                            </Field>
+                                        </Box>
+                                        <Box>
+                                            <Field name='lastname' >
+                                                {({ field, form }) => (
+                                                    <FormControl isInvalid={form.errors.lastname && form.touched.lastname}>
+                                                        <FormLabel htmlFor='lastname'>Last Name</FormLabel>
+                                                        <Input {...field} id='lastname' />
+                                                        <FormErrorMessage>{form.errors.lastname}</FormErrorMessage>
+                                                    </FormControl>
+                                                )}
+                                            </Field>
+                                        </Box>
+                                        <Box>
+                                            <Select
+                                                label="Legislative District"
+                                                name="legislativeDistrict"
+                                                options={legislativeDistrictOptions}
+                                            />
+                                        </Box>
+                                        <Box>
+                                            <Select
+                                                label="Administrative District"
+                                                name="administrativeDistrict"
+                                                options={administrativeDistricts}
+                                            />
+                                        </Box>
+                                        <Box>
+                                            <Select
+                                                label="Barangay"
+                                                name="barangay"
+                                                options={barangayOptions}
+                                            />
+                                        </Box>
+                                        <Box>
+                                            <Field name='age' >
+                                                {({ field, form }) => (
+                                                    <FormControl isInvalid={form.errors.age && form.touched.age}>
+                                                        <FormLabel htmlFor='firstname'>Age</FormLabel>
+                                                        <NumberInput >
+                                                            <NumberInputField
+                                                                {...field}
+                                                                id='age'
+                                                            />
+                                                        </NumberInput>
+                                                        <FormErrorMessage>{form.errors.age}</FormErrorMessage>
+                                                    </FormControl>
+                                                )}
+                                            </Field>
+                                        </Box>
 
-                                        <Select
-                                            label="Administrative District"
-                                            name="administrativeDistrict"
-                                            options={administrativeDistricts}
-                                        />
 
-                                        <Select
-                                            label="Barangay"
-                                            name="barangay"
-                                            options={barangayOptions}
-                                        />
-
-                                        <Field name='age' >
-                                            {({ field, form }) => (
-                                                <FormControl isInvalid={form.errors.age && form.touched.age}>
-                                                    <FormLabel htmlFor='firstname'>Age</FormLabel>
-                                                    <NumberInput  >
-                                                        <NumberInputField
-                                                            {...field}
-                                                            id='age'
-                                                            placeholder='age'
-                                                        />
-                                                    </NumberInput>
-                                                    <FormErrorMessage>{form.errors.age}</FormErrorMessage>
-                                                </FormControl>
-                                            )}
-                                        </Field>
-
-                                        <Button
-                                            mt={4}
-                                            colorScheme='teal'
-                                            isLoading={props.isSubmitting}
-                                            type='submit'
-                                        >
-                                            Submit
-                                        </Button>
-                                    </Form>
-                                )}
-                            </Formik>
-                        </Stack>
-                    </DrawerBody>
-                    <DrawerFooter borderTopWidth='1px'>
-                        <Button variant='outline' mr={3} onClick={onClose}>
-                            Cancel
-                        </Button>
-                    </DrawerFooter>
-                </DrawerContent>
-            </Drawer>
+                                    </Stack>
+                                </ModalBody>
+                                <ModalFooter borderTopWidth='1px'>
+                                    <Button
+                                        mr={3}
+                                        colorScheme='blue'
+                                        isLoading={props.isSubmitting}
+                                        type='submit'
+                                    >
+                                        Submit
+                                    </Button>
+                                    <Button variant='outline' mr={3} onClick={onClose}>
+                                        Cancel
+                                    </Button>
+                                </ModalFooter>
+                            </Form>
+                        )}
+                    </Formik>
+                </ModalContent>
+            </Modal>
         </>
     )
 }

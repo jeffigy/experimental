@@ -1,35 +1,94 @@
-import {Box, Center, Container, Flex, Heading, Stack, Text, useColorModeValue} from '@chakra-ui/react'
-import React, {useEffect, useState} from 'react'
-import {Layout} from '../../components/Layout'
-import {useAuth} from '../../contexts/AuthContext'
-import {collection, onSnapshot, query, where} from "firebase/firestore";
-import {db} from '../../utils/init-firebase'
+import { Box, Center, HStack, Text, Avatar, Wrap, WrapItem, Stack, Flex } from '@chakra-ui/react'
+import React, { useEffect, useState } from 'react'
+import { Layout } from '../../components/Layout'
+import { useAuth } from '../../contexts/AuthContext'
+import { collection, onSnapshot, query, where } from "firebase/firestore";
+import { db } from '../../utils/init-firebase'
 
 import Update from './Update'
 
 export default function Profile() {
-   const { currentUser } = useAuth()
-   const [data,setData]= useState([])
+  const { currentUser } = useAuth()
+  const [data, setData] = useState([])
 
-    useEffect(() => {
-        fetchData();
-    }, []);
+  useEffect(() => {
+    fetchData();
+  }, []);
 
-    const fetchData = () => {
-        const userData = []
-        const q = query(collection(db, "users"), where("email", "==", currentUser.email))
-        onSnapshot(q, (snapshot) => {
-            snapshot.forEach((doc) => {
-                userData.push(doc.data())
-            })
-            setData(userData)
-        })
+  const fetchData = () => {
+    const userData = []
+    const q = query(collection(db, "users"), where("email", "==", currentUser.email))
+    onSnapshot(q, (snapshot) => {
+      snapshot.forEach((doc) => {
+        userData.push(doc.data())
+      })
+      setData(userData)
+    })
 
-    };
+  };
 
   return (
     <Layout>
-      <Heading>User Profile</Heading>
+      <Center>
+        <Box
+          borderWidth='1px'
+          p={10}
+          borderRadius='lg'
+        >
+          <HStack justify={'right'}>
+            {data.map(item => (
+              <Flex align={'center'}>
+                <Update id={item}/>
+              </Flex>
+            ))}
+          </HStack>
+          <Stack spacing={5}>
+            <Center>
+              <Wrap>
+                <WrapItem>
+                  <Avatar size='2xl' src='https://bit.ly/broken-link' />
+                </WrapItem>
+              </Wrap>
+            </Center>
+            {data.map(item => (
+              <Center>
+                <Text>
+                  {item.displayName}
+                </Text>
+              </Center>
+            ))}
+            <HStack spacing={10}>
+              <Box>
+                <Center>
+                  <Text color='gray.500' fontWeight={700}>
+                    Email
+                  </Text>
+                </Center>
+                {currentUser.email}
+              </Box>
+              <Box>
+                <Center>
+                  <Text color='gray.500' fontWeight={700}>
+                    Last Login
+                  </Text>
+                </Center>
+                {currentUser.metadata.lastSignInTime}
+              </Box>
+              <Box>
+                <Center>
+                  <Text color='gray.500' fontWeight={700}>
+                    Date Account Created
+                  </Text>
+                </Center>
+                {currentUser.metadata.creationTime}
+              </Box>
+            </HStack>
+          </Stack>
+        </Box>
+
+
+      </Center>
+      {/* <Heading>User Profile</Heading>
       <Container maxW='container.lg' overflowX='auto' py={4}>
         <Center py={12}>
       <Box
@@ -37,7 +96,8 @@ export default function Profile() {
         bg={useColorModeValue('white', 'gray.800')}
         rounded={'md'}
         overflow={'hidden'}
-        boxShadow={'lg'}>
+        boxShadow={'lg'}
+        >
         <Box p={6}>
           <Stack spacing={0} align={'center'} mb={5}>
             <Heading fontSize={'2xl'} fontWeight={500} fontFamily={'body'}>
@@ -86,7 +146,7 @@ export default function Profile() {
         </Box>
       </Box>
     </Center>
-      </Container>
+      </Container> */}
     </Layout>
   )
 }

@@ -39,14 +39,22 @@ export default function IndexClient() {
                 name: "First Name",
                 selector: (row) => row.first,
                 sortable: true,
-                grow: 2,
+            },
+            {
+                name: "Middle Name",
+                selector: (row) => row.middle,
+                sortable: true,
             },
             {
                 name: "Last Name",
                 selector: (row) => row.last,
                 sortable: true,
-                grow: 2,
             },
+            // {
+            //     name: "Expected Date of Confinement",
+            //     selector: (row) => row.edc.seconds*1000,
+            //     sortable: true,
+            // },
             {
                 name: "Actions",
                 cell: (works) => <HStack>
@@ -88,22 +96,28 @@ export default function IndexClient() {
                 columns={columns}
                 data={
                     targetClient.filter((value) => {
-                    if (filterText === "") {
-                        return value;
-                    } else if (
-                        value.first && value.first
-                            .toLowerCase()
-                            .includes(filterText.toLowerCase())
-                    ) {
-                        return value;
-                    } else if (
-                        value.last && value.last
-                            .toLowerCase()
-                            .includes(filterText.toLowerCase())
-                    ) {
-                        return value;
-                    }
-                })
+                        if (filterText === "") {
+                            return value;
+                        } else if (
+                            value.first && value.first
+                                .toLowerCase()
+                                .includes(filterText.toLowerCase())
+                        ) {
+                            return value;
+                        } else if (
+                            value.middle && value.middle
+                                .toLowerCase()
+                                .includes(filterText.toLowerCase())
+                        ) {
+                            return value;
+                        } else if (
+                            value.last && value.last
+                                .toLowerCase()
+                                .includes(filterText.toLowerCase())
+                        ) {
+                            return value;
+                        }
+                    })
                 }
 
             />
