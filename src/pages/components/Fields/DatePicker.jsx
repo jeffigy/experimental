@@ -4,33 +4,26 @@ import { Field } from 'formik'
 import { FormLabel } from '@chakra-ui/react'
 import 'react-datepicker/dist/react-datepicker.css'
 import ErrorMessaging from './ErrorMessaging'
-import {parseISO} from "date-fns";
-
 
 
 export default function DatePicker(props) {
     const { label, name } = props
-
-
-
+    
     return (
         <>
             <FormLabel>{label}</FormLabel>
             <Field name={name} >
                 {
                     ({ form, field }) => {
-                        const { setFieldValue } = form
 
-                        const { value } = field
-                console.log(value,"Fuck my rendering")
+                        const {setFieldValue  } = form
+                        const {  value} =  field
                         return (
                             <DateView
                                 className="chakra-input css-1c6j008"
                                 id={name}
                                 {...field}
-
-
-                                selected={ value.seconds*1000}
+                                selected={ value}
                                 onChange={val => setFieldValue(name, val)}
                                 isClearable
                                 peekNextMonth
