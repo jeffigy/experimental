@@ -40,21 +40,181 @@ export default function FormOneB({works}) {
 
     const initialValues = {
 
-    ...works.FormOneB
+            records: {
+                row1: {
+                    date: new Date(),
+                    complaints: '',
+                    mncServicesGiven: '',
+                    nameOfProviderAndSignature: '',
+                    nextFollowUpSchedule: new Date()
+                },
+                row2: {
+                    date: new Date(),
+                    complaints: '',
+                    mncServicesGiven: '',
+                    nameOfProviderAndSignature: '',
+                    nextFollowUpSchedule: new Date()
+                },
+                row3: {
+                    date: new Date(),
+                    complaints: '',
+                    mncServicesGiven: '',
+                    nameOfProviderAndSignature: '',
+                    nextFollowUpSchedule: new Date()
+                },
+                row4: {
+                    date: new Date(),
+                    complaints: '',
+                    mncServicesGiven: '',
+                    nameOfProviderAndSignature: '',
+                    nextFollowUpSchedule: new Date()
+                }
+            },
+            abdominalExamFindings: {
+                firstTrimester: {
+                    firstMonth: {
+                        date: new Date(),
+                        fundicHeight: '',
+                        fetalHeartTomes: '',
+                        aog: '',
+                        leopolds: '',
+                        lOne: '',
+                        lTwo: '',
+                        lThree: '',
+                        lFour: '',
+                        uterineAcitivty: ''
+                    },
+                    secondMonth: {
+                        date: new Date(),
+                        fundicHeight: '',
+                        fetalHeartTomes: '',
+                        aog: '',
+                        leopolds: '',
+                        lOne: '',
+                        lTwo: '',
+                        lThree: '',
+                        lFour: '',
+                        uterineAcitivty: ''
+                    },
+                    thirdMonth: {
+                        date: new Date(),
+                        fundicHeight: '',
+                        fetalHeartTomes: '',
+                        aog: '',
+                        leopolds: '',
+                        lOne: '',
+                        lTwo: '',
+                        lThree: '',
+                        lFour: '',
+                        uterineAcitivty: ''
+
+                    }
+                },
+                secondTrimester: {
+                    fourthMonth: {
+                        date: new Date(),
+                        fetalHeartTomes: '',
+                        aog: '',
+                        leopolds: '',
+                        lOne: '',
+                        lTwo: '',
+                        lThree: '',
+                        lFour: '',
+                        uterineAcitivty: ''
+                    },
+                    fifthMonth: {
+                        date: new Date(),
+                        fundicHeight: '',
+                        fetalHeartTomes: '',
+                        aog: '',
+                        leopolds: '',
+                        lOne: '',
+                        lTwo: '',
+                        lThree: '',
+                        lFour: '',
+                        uterineAcitivty: ''
+                    },
+                    sixthMonth: {
+                        date: new Date(),
+                        fundicHeight: '',
+                        fetalHeartTomes: '',
+                        aog: '',
+                        leopolds: '',
+                        lOne: '',
+                        lTwo: '',
+                        lThree: '',
+                        lFour: '',
+                        uterineAcitivty: ''
+                    }
+                },
+                thirdTrimester: {
+                    seventhMonth: {
+                        date: new Date(),
+                        fundicHeight: '',
+                        fetalHeartTomes: '',
+                        aog: '',
+                        leopolds: '',
+                        lOne: '',
+                        lTwo: '',
+                        lThree: '',
+                        lFour: '',
+                        uterineAcitivty: ''
+                    },
+                    eightMonth: {
+                        date: new Date(),
+                        fundicHeight: '',
+                        fetalHeartTomes: '',
+                        aog: '',
+                        leopolds: '',
+                        lOne: '',
+                        lTwo: '',
+                        lThree: '',
+                        lFour: '',
+                        uterineAcitivty: ''
+                    },
+                    ninethMonth: {
+                        date: new Date(),
+                        fundicHeight: '',
+                        fetalHeartTomes: '',
+                        aog: '',
+                        leopolds: '',
+                        lOne: '',
+                        lTwo: '',
+                        lThree: '',
+                        lFour: '',
+                        uterineAcitivty: ''
+                    }
+                },
+                remarks: {
+                    date: new Date(),
+                    fundicHeight: '',
+                    fetalHeartTomes: '',
+                    aog: '',
+                    leopolds: '',
+                    lOne: '',
+                    lTwo: '',
+                    lThree: '',
+                    lFour: '',
+                    uterineAcitivty: ''
+                }
+            }
+
 
     }
 
     const onSubmit = (values) => {
         console.log('Form data', values)
-        updateUsers2(values)
+        updateUsers2(values).then(r => {
+            alert('Successfully Updated')
+        })
+
     }
 
     async  function updateUsers2(values) {
 
         const userRef = doc(db, 'client', works.id);
-        const newValues = JSON.parse(JSON.stringify(values))
         await  updateDoc(userRef,{
-            FormOneB: newValues
+            FormOneB: values
 
         })
     }
