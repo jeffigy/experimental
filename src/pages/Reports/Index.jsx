@@ -36,7 +36,7 @@ export default function Index() {
         <Layout>
             <Flex>
                 <Heading pb={5}>
-                    Reports
+                    REPORTS
                 </Heading>
             </Flex>
             <Center>

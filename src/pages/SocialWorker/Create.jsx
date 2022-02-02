@@ -1,12 +1,12 @@
 import React from 'react'
 import {
-    Drawer,
-    DrawerBody,
-    DrawerFooter,
-    DrawerHeader,
-    DrawerOverlay,
-    DrawerContent,
-    DrawerCloseButton, useDisclosure, Button, Stack, FormControl, FormLabel, Input, FormErrorMessage
+    Modal,
+    ModalBody,
+    ModalFooter,
+    ModalHeader,
+    ModalOverlay,
+    ModalContent,
+    ModalCloseButton, useDisclosure, Button, Stack, FormControl, FormLabel, Input, FormErrorMessage, Box
 } from '@chakra-ui/react'
 import { Field, Form, Formik } from "formik";
 import { v4 as uuidv4 } from 'uuid';
@@ -33,128 +33,135 @@ export default function Create() {
     return (
         <>
             <Button ref={btnRef} leftIcon={<AddIcon />} colorScheme='green' onClick={onOpen}>
-                Add new user
+                Add new worker
             </Button>
-            <Drawer
+            <Modal
                 isOpen={isOpen}
-                placement='right'
                 initialFocusRef={firstField}
                 onClose={onClose}
             >
-                <DrawerOverlay />
-                <DrawerContent>
-                    <DrawerCloseButton />
-                    <DrawerHeader borderBottomWidth='1px'>
+                <ModalOverlay />
+                <ModalContent>
+                    <ModalCloseButton />
+                    <ModalHeader borderBottomWidth='1px'>
                         Add new Social Worker
-                    </DrawerHeader>
-                    <DrawerBody>
-                        <Stack spacing='24px'>
-                            <Formik
-                                initialValues={{
-                                    id: uuidv4(),
-                                    displayName: "",
-                                    email: '',
-                                    administrativeDistrict: '',
-                                    legislativeDistrict: '',
-                                    barangay: '',
-                                    isAdmin: false,
-                                }}
-                                onSubmit={(values, actions) => {
-                                    manualLogin(values)
+                    </ModalHeader>
+                    <Formik
+                        initialValues={{
+                            id: uuidv4(),
+                            displayName: "",
+                            email: '',
+                            administrativeDistrict: '',
+                            legislativeDistrict: '',
+                            barangay: '',
+                            isAdmin: false,
+                        }}
+                        onSubmit={(values, actions) => {
+                            manualLogin(values)
 
-                                        .then(() => {
-                                            toast({
-                                                title: 'Success',
-                                                description: 'User created successfully',
-                                                status: 'success',
-                                                duration: 9000,
-                                                isClosable: true,
-                                            })
-                                            actions.setSubmitting(false)
-                                            onClose()
-                                        })
+                                .then(() => {
+                                    toast({
+                                        title: 'Success',
+                                        description: 'User created successfully',
+                                        status: 'success',
+                                        duration: 9000,
+                                        isClosable: true,
+                                    })
+                                    actions.setSubmitting(false)
+                                    onClose()
+                                })
 
-                                        .catch(err => {
-                                                toast({
-                                                    title: 'Error',
-                                                    description: err.message,
-                                                    status: 'error',
-                                                    duration: 9000,
-                                                    isClosable: true,
-                                                })
-                                                actions.setSubmitting(false)
-                                            }
-                                        )
+                                .catch(err => {
+                                    toast({
+                                        title: 'Error',
+                                        description: 'All fields are required',
+                                        status: 'error',
+                                        duration: 9000,
+                                        isClosable: true,
+                                    })
+                                    actions.setSubmitting(false)
                                 }
-                                }
-                            >
-                                {(props) => (
+                                )
+                        }
+                        }
+                    >
+                        {(props) => (
+                            <Form>
 
-                                    <Form>
-                                        {}
-                                        <Field name='displayName' >
-                                            {({ field, form }) => (
-                                                <FormControl isInvalid={form.errors.displayName && form.touched.displayName}>
-                                                    <FormLabel htmlFor='displayName'>Name</FormLabel>
-                                                    <Input {...field} id='displayName' placeholder='Input Name' />
-                                                    <FormErrorMessage>{form.errors.displayName}</FormErrorMessage>
-                                                </FormControl>
-                                            )}
-                                        </Field>
-
+                                <ModalBody>
+                                    <Stack spacing={4}>
+                                        <Box>
+                                            <Field name='displayName' >
+                                                {({ field, form }) => (
+                                                    <FormControl isInvalid={form.errors.displayName && form.touched.displayName}>
+                                                        <FormLabel htmlFor='displayName'>Name</FormLabel>
+                                                        <Input {...field} id='displayName' />
+                                                        <FormErrorMessage>{form.errors.displayName}</FormErrorMessage>
+                                                    </FormControl>
+                                                )}
+                                            </Field>
+                                        </Box>
                                         <Field name='email' >
                                             {({ field, form }) => (
                                                 <FormControl isInvalid={form.errors.email && form.touched.email}>
                                                     <FormLabel htmlFor='email'>Email Address</FormLabel>
-                                                    <Input {...field} id='email' placeholder='Input Email' />
+                                                    <Input {...field} id='email' />
                                                     <FormErrorMessage>{form.errors.email}</FormErrorMessage>
                                                 </FormControl>
                                             )}
                                         </Field>
-                                        <Select
-                                            label="Legislative District"
-                                            name="legislativeDistrict"
-                                            options={legislativeDistrictOptions}
-                                        />
-                                        <Select
-                                            label="Administrative District"
-                                            name="administrativeDistrict"
-                                            options={administrativeDistricts}
-                                        />
-                                        <Select
-                                            label="Barangay"
-                                            name="barangay"
-                                            options={barangayOptions}
-                                        />
-                                        <Select
-                                            label="Position"
-                                            name="isAdmin"
-                                            options={positionOptions}
-                                        />
-                                        <Button
-                                            mt={4}
-                                            colorScheme='teal'
-                                            isLoading={props.isSubmitting}
-                                            type='submit'
-                                        >
-                                            Submit
-                                        </Button>
-                                    </Form>
-                                )}
-                            </Formik>
-                        </Stack>
-                    </DrawerBody>
+                                        <Box>
+                                            <Select
+                                                label="Legislative District"
+                                                name="legislativeDistrict"
+                                                options={legislativeDistrictOptions}
+                                            />
+                                        </Box>
+                                        <Box>
+                                            <Select
+                                                label="Administrative District"
+                                                name="administrativeDistrict"
+                                                options={administrativeDistricts}
+                                            />
+                                        </Box>
+                                        <Box>
+                                            <Select
+                                                label="Barangay"
+                                                name="barangay"
+                                                options={barangayOptions}
+                                            />
+                                        </Box>
+                                        <Box>
+                                            <Select
+                                                label="Position"
+                                                name="isAdmin"
+                                                options={positionOptions}
+                                            />
+                                        </Box>
+                                    </Stack>
+                                </ModalBody>
 
-                    <DrawerFooter borderTopWidth='1px'>
-                        <Button
-                            variant='outline'
-                            mr={3}
-                            onClick={onClose}>
-                            Cancel
-                        </Button>
-                    </DrawerFooter>
-                </DrawerContent>
-            </Drawer>
+                                <ModalFooter borderTopWidth='1px'>
+                                    <Button
+                                        mr={3}
+                                        colorScheme='blue'
+                                        isLoading={props.isSubmitting}
+                                        type='submit'
+                                    >
+                                        Submit
+                                    </Button>
+                                    <Button
+                                        variant='outline'
+                                        mr={3}
+                                        onClick={onClose}>
+                                        Cancel
+                                    </Button>
+                                </ModalFooter>
+                            </Form>
+                        )}
+                    </Formik>
+                </ModalContent>
+            </Modal>
         </>
     )
 }

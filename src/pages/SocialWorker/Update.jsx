@@ -1,14 +1,15 @@
 import React from 'react'
 import {
-    Drawer,
-    DrawerBody,
-    DrawerFooter,
-    DrawerHeader,
-    DrawerOverlay,
-    DrawerContent,
-    DrawerCloseButton, useDisclosure, Button, Input, FormControl, FormErrorMessage, FormLabel, Stack, useToast
+    Modal,
+    ModalBody,
+    ModalFooter,
+    ModalHeader,
+    ModalOverlay,
+    ModalContent, Tooltip,
+    ModalCloseButton, useDisclosure, Button, Input, FormControl, FormErrorMessage, FormLabel, Stack, useToast
 } from '@chakra-ui/react'
 import { Form, Field, Formik } from "formik";
+import { EditIcon } from '@chakra-ui/icons'
 
 import { doc, updateDoc } from "firebase/firestore";
 import { db } from "../../utils/init-firebase";
@@ -36,56 +37,63 @@ export default function Update({ works }) {
 
     return (
         <>
-            <Button ref={btnRef} colorScheme='teal' onClick={onOpen}>
-                <ViewIcon />
-            </Button>
-            <Drawer
+            <Tooltip
+                label="Update Client"
+                aria-label='A tooltip'
+            >
+                <Button
+                    colorScheme='yellow'
+                    onClick={() => { onOpen() }}
+                >
+                    <EditIcon />
+                </Button>
+            </Tooltip>
+            <Modal
                 isOpen={isOpen}
                 placement='right'
                 initialFocusRef={firstField}
                 onClose={onClose}
             >
-                <DrawerOverlay />
-                <DrawerContent>
-                    <DrawerCloseButton />
-                    <DrawerHeader borderBottomWidth='1px'>
+                <ModalOverlay />
+                <ModalContent>
+                    <ModalCloseButton />
+                    <ModalHeader borderBottomWidth='1px'>
                         Update Social Worker Account
-                    </DrawerHeader>
+                    </ModalHeader>
 
-                    <DrawerBody>
-                        <Stack spacing='24px'>
-                            <Formik
-                                initialValues={{
-                                    ...works
-                                }}
-                                onSubmit={(values, actions) => {
-                                    updateUsers(values)
-                                        .then(() => {
-                                            toast({
-                                                title: 'Success',
-                                                description: 'User Profile Updated Successfully',
-                                                status: 'info',
-                                                duration: 9000,
-                                                isClosable: true,
-                                            })
-                                            actions.setSubmitting(false)
-                                            onClose()
-                                        })
+                    <Formik
+                        initialValues={{
+                            ...works
+                        }}
+                        onSubmit={(values, actions) => {
+                            updateUsers(values)
+                                .then(() => {
+                                    toast({
+                                        title: 'Success',
+                                        description: 'User Profile Updated Successfully',
+                                        status: 'info',
+                                        duration: 9000,
+                                        isClosable: true,
+                                    })
+                                    actions.setSubmitting(false)
+                                    onClose()
+                                })
 
-                                }}
-                            >
-                                {(props) => (
-                                    <Form>
+                        }}
+                    >
+                        {(props) => (
+                            <Form>
+                                <ModalBody>
+                                    <Stack spacing='24px'>
                                         <Field name='displayName' >
                                             {({ field, form }) => (
                                                 <FormControl isInvalid={form.errors.displayName && form.touched.displayName}>
-                                                    <FormLabel htmlFor='displayName'>Display Name</FormLabel>
+                                                    <FormLabel htmlFor='displayName'>Name</FormLabel>
                                                     <Input {...field} id='displayName' placeholder='displayName' />
                                                     <FormErrorMessage>{form.errors.displayName}</FormErrorMessage>
                                                 </FormControl>
                                             )}
                                         </Field>
-
                                         <Field name='email' >
                                             {({ field, form }) => (
                                                 <FormControl isInvalid={form.errors.email && form.touched.email}>
@@ -119,29 +127,29 @@ export default function Update({ works }) {
 
 
 
-                                        <Button
-                                            mt={4}
-                                            colorScheme='teal'
-                                            isLoading={props.isSubmitting}
-                                            type='submit'
-                                        >
-                                            Submit
-                                        </Button>
-                                    </Form>
-                                )}
-                            </Formik>
-                        </Stack>
-                    </DrawerBody>
 
-                    <DrawerFooter borderTopWidth='1px'>
-                        <Button variant='outline' mr={3} onClick={onClose}>
-                            Cancel
-                        </Button>
+                                    </Stack>
+                                </ModalBody>
 
+                                <ModalFooter borderTopWidth='1px'>
+                                    <Button
+                                        isLoading={props.isSubmitting}
+                                        type='submit'
+                                        colorScheme='blue'
+                                        mr={3}
+                                    >
+                                        Submit
+                                    </Button>
+                                    <Button variant='outline' mr={3} onClick={onClose}>
+                                        Cancel
+                                    </Button>
 
-                    </DrawerFooter>
-                </DrawerContent>
-            </Drawer>
+                                </ModalFooter>
+                            </Form>
+                        )}
+                    </Formik>
+                </ModalContent>
+            </Modal>
         </>
     )
 }

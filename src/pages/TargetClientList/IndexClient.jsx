@@ -3,7 +3,7 @@ import {
     Spacer,
     HStack,
     Heading,
-    Input,
+    Input, Box
 } from '@chakra-ui/react'
 import { Layout } from '../../components/Layout'
 import React, { useEffect, useState, useMemo } from 'react'
@@ -71,56 +71,60 @@ export default function IndexClient() {
     return (
 
         <Layout>
-
             <Flex pb={5}>
                 <Heading >
-                    Target Client List
+                    TARGET CLIENT LIST
                 </Heading>
-                <Spacer />
-                <HStack>
-                    <Input
-                        type="text"
-                        placeholder="Search List"
-                        onChange={(e) => setFilterText(e.target.value)}
-                    />
-                    <Create />
-                </HStack>
             </Flex>
+            <Box borderWidth='1px' p={10} borderRadius='lg'>
+                <Flex pb={5}>
+                    <Box>
+                        <Create />
+                    </Box>
+                    <Spacer />
+                    <Box>
+                        <Input
+                            type="text"
+                            placeholder="Search List"
+                            onChange={(e) => setFilterText(e.target.value)}
+                        />
+                    </Box>
+                </Flex>
+                <DataTable
+                    highlightOnHover
+                    pagination
+                    direction="ltr"
+                    responsive
+                    striped
+                    columns={columns}
+                    data={
+                        targetClient.filter((value) => {
+                            if (filterText === "") {
+                                return value;
+                            } else if (
+                                value.first && value.first
+                                    .toLowerCase()
+                                    .includes(filterText.toLowerCase())
+                            ) {
+                                return value;
+                            } else if (
+                                value.middle && value.middle
+                                    .toLowerCase()
+                                    .includes(filterText.toLowerCase())
+                            ) {
+                                return value;
+                            } else if (
+                                value.last && value.last
+                                    .toLowerCase()
+                                    .includes(filterText.toLowerCase())
+                            ) {
+                                return value;
+                            }
+                        })
+                    }
 
-            <DataTable
-                highlightOnHover
-                pagination
-                direction="ltr"
-                responsive
-                striped
-                columns={columns}
-                data={
-                    targetClient.filter((value) => {
-                        if (filterText === "") {
-                            return value;
-                        } else if (
-                            value.first && value.first
-                                .toLowerCase()
-                                .includes(filterText.toLowerCase())
-                        ) {
-                            return value;
-                        } else if (
-                            value.middle && value.middle
-                                .toLowerCase()
-                                .includes(filterText.toLowerCase())
-                        ) {
-                            return value;
-                        } else if (
-                            value.last && value.last
-                                .toLowerCase()
-                                .includes(filterText.toLowerCase())
-                        ) {
-                            return value;
-                        }
-                    })
-                }
-
-            />
+                />
+            </Box>
         </Layout>
     )
 }

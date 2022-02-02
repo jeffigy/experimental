@@ -91,8 +91,6 @@ export default function Loginpage() {
         >
 
           <Stack spacing='6'>
-            <h1>Email: demo@gmail.com</h1>
-            <h1>Password: 123456</h1>
             <FormControl id='email'>
               <FormLabel>Email address</FormLabel>
               <Input

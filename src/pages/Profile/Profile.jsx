@@ -50,12 +50,14 @@ export default function Profile() {
                 </WrapItem>
               </Wrap>
             </Center>
-            {data.map(item => (
+            {data.map(user => (
+              <>
               <Center>
                 <Text>
-                  {item.displayName}
+                  {user.displayName}
                 </Text>
               </Center>
+              </>
             ))}
             <HStack spacing={10}>
               <Box>

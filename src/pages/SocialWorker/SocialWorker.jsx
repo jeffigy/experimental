@@ -1,77 +1,128 @@
 import {
     Flex,
     Spacer,
-    Stack,
+    HStack,
     Heading,
-    Table,
-    Thead,
-    Tr,
-    Th,
-    Tbody,
-    Td,
+    Input, Box
 } from '@chakra-ui/react'
-import React, { useState, useEffect } from 'react'
-import {
-    collection, onSnapshot,
-} from "firebase/firestore";
-import { db } from '../../utils/init-firebase'
+import { Layout } from '../../components/Layout'
+import React, { useEffect, useState, useMemo } from 'react'
+import { collection, onSnapshot } from "firebase/firestore";
+import { db } from "../../utils/init-firebase";
 import Create from "./Create";
-import Update from "./Update";
-import {Layout} from "../../components/Layout";
-export default function SocialWorker() {
-    const [socialWork, setSocialWork] = useState([]);
+import DataTable from "react-data-table-component";
+import Update from './Update'
 
-    useEffect(() => {
-        fetchData();
-    }, []);
 
-    const fetchData = () => {
+export default function IndexClient() {
+    const [filterText, setFilterText] = useState("");
+    const [targetClient, setTargetClient] = useState([]);
+    const Data = () => {
         const usersCollectionRef = collection(db, "users");
         onSnapshot(usersCollectionRef, (snapshot) => {
             let userData = []
             snapshot.docs.forEach(doc => {
                 userData.push({ ...doc.data(), id: doc.id })
             })
-            setSocialWork(userData)
+            setTargetClient(userData)
         })
-
     };
 
+    useEffect(() => {
+        Data();
+    }, []);
+
+    const columns = useMemo(
+        () => [
+            {
+                name: "Name",
+                selector: (row) => row.displayName,
+                sortable: true,
+            },
+            {
+                name: "Email",
+                selector: (row) => row.email,
+                sortable: true,
+            },
+            {
+                name: "Last Name",
+                selector: (row) => row.last,
+                sortable: true,
+            },
+            {
+                name: "Actions",
+                cell: (works) => <HStack>
+                                        
+                    {/* <ViewClient works={works} /> */}
+                    <Update works={works} />
+
+                </HStack>
+            },
+        ],
+        []
+    );
+
+
     return (
-
         <Layout>
-            <Flex>
-                <Heading>Social Worker</Heading>
-                <Spacer/>
-                <Create/>
+
+            <Flex pb={5}>
+                <Heading >
+                    SOCIAL WORKER
+                </Heading>
             </Flex>
-            <Table variant='striped'>
-                <Thead>
-                    <Tr>
-                        <Th>Name</Th>
-                        <Th>Actions</Th>
-                    </Tr>
-                </Thead>
-                <Tbody>
-                    {socialWork.map((works) => {
 
-                        return (
+            <Box borderWidth='1px' p={10} borderRadius='lg'>
 
-                            <Tr key={works.id}>
-                                <Td>{works.displayName}</Td>
-                                <Td>
-                                    <Stack direction="row" spacing={1}>
-                                   <Update works= {works}/>
+                <Flex pb={5}>
+                    <Box>
+                        <Create />
+                    </Box>
+                    <Spacer />
+                    <Box>
+                        <Input
+                            type="text"
+                            placeholder="Search List"
+                            onChange={(e) => setFilterText(e.target.value)}
+                        />
+                    </Box>
+                </Flex>
 
+                <DataTable
+                    highlightOnHover
+                    pagination
+                    direction="ltr"
+                    responsive
+                    striped
+                    columns={columns}
+                    data={
+                        targetClient.filter((value) => {
+                            if (filterText === "") {
+                                return value;
+                            } else if (
+                                value.displayName && value.displayName
+                                    .toLowerCase()
+                                    .includes(filterText.toLowerCase())
+                            ) {
+                                return value;
+                            } else if (
+                                value.middle && value.middle
+                                    .toLowerCase()
+                                    .includes(filterText.toLowerCase())
+                            ) {
+                                return value;
+                            } else if (
+                                value.last && value.last
+                                    .toLowerCase()
+                                    .includes(filterText.toLowerCase())
+                            ) {
+                                return value;
+                            }
+                        })
+                    }
 
-                                    </Stack>
-                                </Td>
-                            </Tr>
-                        );
-                    })}
-                </Tbody>
-            </Table>
+                />
+            </Box>
         </Layout>
-
     )
 }

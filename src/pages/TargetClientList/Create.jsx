@@ -476,15 +476,18 @@ export default function Create() {
 
     return (
         <>
-            <Button ref={btnRef} colorScheme='green' onClick={onOpen}>
-                <AddIcon />
+            <Button
+                leftIcon={<AddIcon />}
+                ref={btnRef}
+                colorScheme='green'
+                onClick={onOpen}
+            >
+                Add New Client
             </Button>
             <Modal
                 isOpen={isOpen}
-                placement='right'
                 initialFocusRef={firstField}
                 onClose={onClose}
-                size="xl"
             >
                 <ModalOverlay />
                 <ModalContent>
@@ -495,11 +498,9 @@ export default function Create() {
 
                     <Formik
                         initialValues={{
-
                         }}
                         onSubmit={(values, actions) => {
                             createClient(values)
-
                                 .then(() => {
                                     toast({
                                         title: 'Success',
@@ -514,14 +515,13 @@ export default function Create() {
                                 .catch(err => {
                                     toast({
                                         title: 'Error',
-                                        description: err.message,
+                                        description: 'All fields are required',
                                         status: 'error',
                                         duration: 9000,
                                         isClosable: true,
                                     })
                                     actions.setSubmitting(false)
                                 })
-
                         }}
                     >
                         {(props) => (
@@ -562,6 +562,22 @@ export default function Create() {
                                             </Field>
                                         </Box>
                                         <Box>
+                                            <Field name='age' >
+                                                {({ field, form }) => (
+                                                    <FormControl isInvalid={form.errors.age && form.touched.age}>
+                                                        <FormLabel htmlFor='firstname'>Age</FormLabel>
+                                                        <NumberInput >
+                                                            <NumberInputField
+                                                                {...field}
+                                                                id='age'
+                                                            />
+                                                        </NumberInput>
+                                                        <FormErrorMessage>{form.errors.age}</FormErrorMessage>
+                                                    </FormControl>
+                                                )}
+                                            </Field>
+                                        </Box>
+                                        <Box>
                                             <Select
                                                 label="Legislative District"
                                                 name="legislativeDistrict"
@@ -582,24 +598,7 @@ export default function Create() {
                                                 options={barangayOptions}
                                             />
                                         </Box>
-                                        <Box>
-                                            <Field name='age' >
-                                                {({ field, form }) => (
-                                                    <FormControl isInvalid={form.errors.age && form.touched.age}>
-                                                        <FormLabel htmlFor='firstname'>Age</FormLabel>
-                                                        <NumberInput >
-                                                            <NumberInputField
-                                                                {...field}
-                                                                id='age'
-                                                            />
-                                                        </NumberInput>
-                                                        <FormErrorMessage>{form.errors.age}</FormErrorMessage>
-                                                    </FormControl>
-                                                )}
-                                            </Field>
-                                        </Box>
-
-
+                                        
                                     </Stack>
                                 </ModalBody>
                                 <ModalFooter borderTopWidth='1px'>
