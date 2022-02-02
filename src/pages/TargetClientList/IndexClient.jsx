@@ -50,11 +50,12 @@ export default function IndexClient() {
                 selector: (row) => row.last,
                 sortable: true,
             },
-            // {
-            //     name: "Expected Date of Confinement",
-            //     selector: (row) => row.edc.seconds*1000,
-            //     sortable: true,
-            // },
+           {
+                name: "Expected Date of Confinement",
+                selector: (row) => moment(row.FormOneA.physicalExamination.lmp.seconds*1000 ).add(1, 'day').add(255, 'days').format('LLL'),
+
+                sortable: true,
+            },
             {
                 name: "Actions",
                 cell: (works) => <HStack>
