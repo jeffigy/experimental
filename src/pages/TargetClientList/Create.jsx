@@ -42,12 +42,11 @@ export default function Create() {
     async function createClient(values) {
         const today = new Date();
         const tomorrow = new Date()
-        const edc = tomorrow.setDate(today.getDate() + 227)
 
-        const usersCollectionRef = collection(db, "client");
+
+        const usersCollectionRef = collection(db, "client")
         await addDoc(usersCollectionRef,
             {
-                edc: new Date(edc),
                 first: values.firstname,
                 middle: values.middlename,
                 last: values.lastname,
@@ -229,6 +228,7 @@ export default function Create() {
                         }
                     },
                     physicalExamination: {
+                        lmp: new Date(),
                         vitalSigns: {
                             bloodPressure: '',
                             weight: '',
@@ -245,7 +245,7 @@ export default function Create() {
                         extremities: '',
                         toxoidVaccineStatus: '',
                         impressionDiagnosis: '',
-                        lmp: new Date()
+
                     }
                 },
                 FormOneB: {
