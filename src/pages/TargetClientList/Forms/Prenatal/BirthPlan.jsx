@@ -27,19 +27,72 @@ const accredationStatusOpt = [
 ];
 export default function BirthPlan({works}) {
     const { isOpen, onOpen, onClose } = useDisclosure()
+
+
+    const newConformeDate = new Date(works.BirthPlan.conforme.date.seconds * 1000);
     const initialValues = {
-      ...works.BirthPlan
+
+            attendantName: works.BirthPlan.attendantName,
+            deliveryLocation: works.BirthPlan.deliveryLocation,
+            accredationStatus: works.BirthPlan.accredationStatus,
+            distanceFromResidence: works.BirthPlan.distanceFromResidence,
+            estimatedCost: works.BirthPlan.estimatedCost,
+            modeOfPayment: works.BirthPlan.modeOfPayment,
+
+            availableTransportation: works.BirthPlan.availableTransportation,
+            bringer: {
+                Name: works.BirthPlan.bringer.Name,
+                Address: works.BirthPlan.bringer.Address,
+                Number: works.BirthPlan.bringer.Number,
+            },
+            companion: {
+                Name: works.BirthPlan.companion.Name,
+                Relationship: works.BirthPlan.companion.Relationship,
+                Address: works.BirthPlan.companion.Address,
+                Number: works.BirthPlan.companion.Number,
+            },
+            careTaker: {
+                Name: works.BirthPlan.careTaker.Name,
+                Relationship: works.BirthPlan.careTaker.Relationship,
+            },
+
+            bloodType: works.BirthPlan.bloodType,
+            donors: {
+                donorName1: works.BirthPlan.donors.donorName1,
+                donorAddress1: works.BirthPlan.donors.donorAddress1,
+                donorName2: works.BirthPlan.donors.donorName2,
+                donorAddress2: works.BirthPlan.donors.donorAddress2,
+            },
+            complicationReferral: {
+                name: works.BirthPlan.complicationReferral.name,
+                address: works.BirthPlan.complicationReferral.address,
+                number: works.BirthPlan.complicationReferral.number,
+            },
+
+            maternalHostpital: {
+                name: works.BirthPlan.maternalHostpital.name,
+                address: works.BirthPlan.maternalHostpital.address,
+            },
+            newbornHostpital: {
+                name: works.BirthPlan.newbornHostpital.name,
+                address: works.BirthPlan.newbornHostpital.address,
+            },
+            conforme: {
+                signature: works.BirthPlan.conforme.signature,
+                date: newConformeDate
+            }
+
     }
     const onSubmit = (values) => {
-        updateUsers2(values)
+        updateUsers2(values).then(r =>
+        alert("Successfully Updated"))
     }
 
     async  function updateUsers2(values) {
 
         const userRef = doc(db, 'client', works.id);
-        const newValues = JSON.parse(JSON.stringify(values))
         await  updateDoc(userRef,{
-            BirthPlan: newValues
+            BirthPlan: values
 
         })
     }
