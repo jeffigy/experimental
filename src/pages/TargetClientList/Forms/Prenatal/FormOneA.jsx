@@ -123,7 +123,7 @@ export default function FormOneA({works}) {
     }
 
     async  function updateUsers2(values) {
-        const userRef = doc(db, 'dummy', works.id);
+        const userRef = doc(db, 'client', works.id);
         await  updateDoc(userRef,{
             FormOneA: values
 
