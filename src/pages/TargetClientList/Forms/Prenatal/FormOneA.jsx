@@ -28,23 +28,104 @@ import { doc, updateDoc } from "firebase/firestore";
 import { db } from "../../../../utils/init-firebase";
 import NumberField from "../../../components/Fields/NumberField";
 
+import moment from "moment";
+
 export default function FormOneA({works}) {
     console.log(works,"FormOneAAAAAAAA")
+
+
+
+    const myDate = new Date(works.FormOneA.familySerial.client.birthday.seconds* 1000);
+    const spouseDate = new Date(works.FormOneA.familySerial.spouse.birthday.seconds* 1000);
+    const lmpDate = new Date(works.FormOneA.physicalExamination.lmp.seconds* 1000);
+
+
     const initialValues = {
 
-       ...works.FormOneA
+            familySerial: {
+                client: {
+                    birthday:myDate ,
+                    highestEducation: works.FormOneA.familySerial.client.highestEducation,
+                    occupation: works.FormOneA.familySerial.client.occupation,
+                    addressStreet: works.FormOneA.familySerial.client.addressStreet,
+                    addressBarangay: works.FormOneA.familySerial.client.addressBarangay,
+                    addressMunicipality: works.FormOneA.familySerial.client.addressMunicipality,
+                    addressProvince: works.FormOneA.familySerial.client.addressProvince,
+                },
+                spouse: {
+                    firstName: works.FormOneA.familySerial.spouse.firstName,
+                    middleName: works.FormOneA.familySerial.spouse.middleName,
+                    lastName: works.FormOneA.familySerial.spouse.lastName,
+                    birthday: spouseDate,
+                    highestEducation: works.FormOneA.familySerial.spouse.highestEducation,
+                    occupation: works.FormOneA.familySerial.spouse.occupation,
+                },
+                avgFamilyIncome:  works.FormOneA.familySerial.avgFamilyIncome,
+                noOfChildren: works.FormOneA.familySerial.noOfChildren,
+                birthPlan: works.FormOneA.familySerial.birthPlan,
+            },
+            medicalHistory: {
+                reviewOfSystems: {
+
+                    heent: JSON.parse(JSON.stringify(works.FormOneA.medicalHistory.reviewOfSystems.heent)),
+                    chestHeart: JSON.parse(JSON.stringify(works.FormOneA.medicalHistory.reviewOfSystems.chestHeart)),
+                    abdomen: JSON.parse(JSON.stringify(works.FormOneA.medicalHistory.reviewOfSystems.abdomen)),
+                    genital: JSON.parse(JSON.stringify(works.FormOneA.medicalHistory.reviewOfSystems.genital)),
+                    extremeties: JSON.parse(JSON.stringify(works.FormOneA.medicalHistory.reviewOfSystems.extremeties)),
+                    skin: JSON.parse(JSON.stringify(works.FormOneA.medicalHistory.reviewOfSystems.skin)),
+                },
+                familyHistory: works.FormOneA.medicalHistory.familyHistory,
+                pastHealthHistory: works.FormOneA.medicalHistory.pastHealthHistory,
+                socialHistory: works.FormOneA.medicalHistory.socialHistory,
+                obstericalHistory: {
+                    historyOfPreviousDeliveries: works.FormOneA.medicalHistory.obstericalHistory.historyOfPreviousDeliveries,
+                    menstrualHistory: works.FormOneA.medicalHistory.obstericalHistory.menstrualHistory,
+                },
+                familyPlanningHistory: {
+                    previouslyUsedMethod: works.FormOneA.medicalHistory.familyPlanningHistory.previouslyUsedMethod,
+                }
+            },
+            physicalExamination: {
+                lmp:lmpDate,
+                vitalSigns: {
+                    bloodPressure: works.FormOneA.physicalExamination.vitalSigns.bloodPressure,
+                    weight: works.FormOneA.physicalExamination.vitalSigns.weight,
+                    height: works.FormOneA.physicalExamination.vitalSigns.height,
+                    bmi: works.FormOneA.physicalExamination.vitalSigns.bmi,
+                    pulseRate: works.FormOneA.physicalExamination.vitalSigns.pulseRate,
+                },
+                conjunctiva: works.FormOneA.physicalExamination.conjunctiva,
+                neck: works.FormOneA.physicalExamination.neck,
+                breast: works.FormOneA.physicalExamination.breast,
+                thorax: works.FormOneA.physicalExamination.thorax,
+                abdomen: works.FormOneA.physicalExamination.abdomen,
+                vaginalExamination: works.FormOneA.physicalExamination.vaginalExamination,
+                extremities: works.FormOneA.physicalExamination.extremities,
+                toxoidVaccineStatus: works.FormOneA.physicalExamination.toxoidVaccineStatus,
+                impressionDiagnosis: works.FormOneA.physicalExamination.impressionDiagnosis,
+
+            }
+
+
+
+
+
+
+
+
     }
 
     const onSubmit = (values) => {
-        updateUsers2(values)
+        updateUsers2(values).then(r =>
+            alert('Successfully Updated')
+        )
+
     }
 
     async  function updateUsers2(values) {
-
-        const userRef = doc(db, 'client', works.id);
-        const newValues = JSON.parse(JSON.stringify(values))
+        const userRef = doc(db, 'dummy', works.id);
         await  updateDoc(userRef,{
-            FormOneA: newValues
+            FormOneA: values
 
         })
     }
