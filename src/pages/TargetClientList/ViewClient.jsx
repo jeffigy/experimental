@@ -61,7 +61,7 @@ export default function ViewPatient({ works }) {
                                     </Box>
                                     <Spacer />
                                     <Box>
-                                        <DisplayField label='Address' value={obj.first} />
+                                        <DisplayField label='Address' value={obj.FormOneA.familySerial.client.addressStreet} />
                                     </Box>
                                     <Spacer />
                                     <Box>
@@ -70,17 +70,10 @@ export default function ViewPatient({ works }) {
                                 </Flex>
                                 <Flex>
                                     <Box>
-                                        <DisplayField label='Age' value={obj.first} />
+                                        <DisplayField label='Age' value={obj.age} />
                                     </Box>
                                     <Spacer />
-                                    <Box>
-                                        <DisplayField label='LMP' value={obj.first} />
-                                    </Box>
-                                    <Spacer />
-                                    <Box>
-                                        <DisplayField label='EDC' value={obj.first} />
-                                    </Box>
-                                    <Spacer />
+
                                     <Box>
                                         <Center>
                                             <Heading as='h4' size='md' color='grey'>
@@ -181,7 +174,7 @@ export default function ViewPatient({ works }) {
                                     </Stack>
                                     <Spacer />
                                     <Box>
-                                        <DisplayField label='Type of Delivery' value={obj.first} />
+                                        <DisplayField label='Type of Delivery' value={obj.FormTwoA.physicalExamination.typeOfDelivery} />
                                     </Box>
                                     <Spacer />
                                     <Stack>
@@ -222,7 +215,7 @@ export default function ViewPatient({ works }) {
                                             </Heading>
                                             <HStack>
                                                 <Box>
-                                                    <DisplayField label='Type' value={obj.first} />
+                                                    <DisplayField label='Type' value={obj.FormTwoA.physicalExamination.placeOfDelivery} />
                                                 </Box>
                                                 <Spacer />
                                                 <Box>
