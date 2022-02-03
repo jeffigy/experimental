@@ -32,9 +32,116 @@ import NumberField from "../../../components/Fields/NumberField";
 
 
 export default function FormTwoA({works}) {
+const newDateVisit = new Date(works.FormTwoA.dateOfVisit.seconds * 1000);
+const newDateofDelivery=new Date(works.FormTwoA.physicalExamination.dateOfDelivery.seconds * 1000);
+
+const tabletsDate=new Date(works.FormTwoA.supplementation.noOfTabletsGiven.dateGiven.seconds*1000)
+
+    const vitaminADate = new Date(works.FormTwoA.supplementation.vitaminA.dateGiven.seconds*1000)
+    const ironSulfateDate = new Date(works.FormTwoA.supplementation.ironSulfate.dateGiven.seconds*1000)
 
     const initialValues = {
-    ...works.FormTwoA
+            dateOfVisit:newDateVisit ,
+            physicalExamination: {
+                dateOfDelivery: newDateofDelivery,
+                attendant: works.FormTwoA.physicalExamination.attendant,
+                sex: works.FormTwoA.physicalExamination.sex,
+                typeOfDelivery: works.FormTwoA.physicalExamination.typeOfDelivery,
+                placeOfDelivery: works.FormTwoA.physicalExamination.placeOfDelivery,
+                amtsl: {
+                    steps: {
+                        noOne: works.FormTwoA.physicalExamination.amtsl.steps.noOne,
+                        noTwo: works.FormTwoA.physicalExamination.amtsl.steps.noTwo,
+                        noThree: works.FormTwoA.physicalExamination.amtsl.steps.noThree,
+                    },
+                    isProvided: works.FormTwoA.physicalExamination.amtsl.isProvided,
+                }
+            },
+            assessment: {
+                postPartumMother: {
+                    dangerSigns: {
+
+                        unconscious: works.FormTwoA.assessment.postPartumMother.dangerSigns.unconscious,
+                        VaginalBleeding: {
+                            hrs: works.FormTwoA.assessment.postPartumMother.dangerSigns.VaginalBleeding.hrs,
+                            days: works.FormTwoA.assessment.postPartumMother.dangerSigns.VaginalBleeding.days,
+                            otherVisit: works.FormTwoA.assessment.postPartumMother.dangerSigns.VaginalBleeding.otherVisit,
+                        },
+                        severeAbdominalPain: works.FormTwoA.assessment.postPartumMother.dangerSigns.severeAbdominalPain,
+                        looksVeryIll: works.FormTwoA.assessment.postPartumMother.dangerSigns.looksVeryIll,
+                        severeHeadache: works.FormTwoA.assessment.postPartumMother.dangerSigns.severeHeadache,
+                        severeDiffOfBreath: works.FormTwoA.assessment.postPartumMother.dangerSigns.severeDiffOfBreath,
+                        severeVomiting: works.FormTwoA.assessment.postPartumMother.dangerSigns.severeVomiting,
+                        postPartumDepression: works.FormTwoA.assessment.postPartumMother.dangerSigns.postPartumDepression,
+                    },
+                    pelvicExamFindings: {
+                        uterus: {
+                            contracted: works.FormTwoA.assessment.postPartumMother.pelvicExamFindings.uterus.contracted,
+                            relaxed: works.FormTwoA.assessment.postPartumMother.pelvicExamFindings.uterus.relaxed,
+                        },
+                        vaginalBleeding: {
+                            profuse: works.FormTwoA.assessment.postPartumMother.pelvicExamFindings.vaginalBleeding.profuse,
+                            moderate: works.FormTwoA.assessment.postPartumMother.pelvicExamFindings.vaginalBleeding.moderate,
+                            scanty: works.FormTwoA.assessment.postPartumMother.pelvicExamFindings.vaginalBleeding.scanty,
+                        },
+                        vaginalDischarge: {
+                            color: works.FormTwoA.assessment.postPartumMother.pelvicExamFindings.vaginalDischarge.color,
+                            odor: works.FormTwoA.assessment.postPartumMother.pelvicExamFindings.vaginalDischarge.odor,
+                        },
+                        vaginalLaceration: {
+                            firstDegree: works.FormTwoA.assessment.postPartumMother.pelvicExamFindings.vaginalLaceration.firstDegree,
+                            secondDegree: works.FormTwoA.assessment.postPartumMother.pelvicExamFindings.vaginalLaceration.secondDegree,
+                            thirdDegree: works.FormTwoA.assessment.postPartumMother.pelvicExamFindings.vaginalLaceration.thirdDegree,
+                            lacerationSutured: works.FormTwoA.assessment.postPartumMother.pelvicExamFindings.vaginalLaceration.lacerationSutured,
+                        },
+                        ifCs: works.FormTwoA.assessment.postPartumMother.pelvicExamFindings.ifCs,
+                    }
+                },
+                newborn: {
+                    withPoorSuck: works.FormTwoA.assessment.newborn.withPoorSuck,
+                    ifBreathing: works.FormTwoA.assessment.newborn.ifBreathing,
+                    severeChestIndrawing: works.FormTwoA.assessment.newborn.severeChestIndrawing,
+                    grunting: works.FormTwoA.assessment.newborn.grunting,
+                    convulsions: works.FormTwoA.assessment.newborn.convulsions,
+                    floppyStiffExtremities: works.FormTwoA.assessment.newborn.floppyStiffExtremities,
+                    temp: works.FormTwoA.assessment.newborn.temp,
+                    severeJaundice: works.FormTwoA.assessment.newborn.severeJaundice,
+                    bleedingFromUmbilicalStumpOrCut: works.FormTwoA.assessment.newborn.bleedingFromUmbilicalStumpOrCut,
+                    umbilicusDraining: works.FormTwoA.assessment.newborn.umbilicusDraining,
+                    foulSmellingDischarge: works.FormTwoA.assessment.newborn.foulSmellingDischarge,
+                    skinPostules: works.FormTwoA.assessment.newborn.skinPostules,
+                    essentialNewbornCare: {
+                        one: works.FormTwoA.assessment.newborn.essentialNewbornCare.one,
+                        two: works.FormTwoA.assessment.newborn.essentialNewbornCare.two,
+                        three: works.FormTwoA.assessment.newborn.essentialNewbornCare.three,
+                        four: works.FormTwoA.assessment.newborn.essentialNewbornCare.four,
+                        earlyEncGiven: works.FormTwoA.assessment.newborn.essentialNewbornCare.earlyEncGiven,
+                    },
+                    breastFeeding: works.FormTwoA.assessment.newborn.breastFeeding,
+                    otherEncGiven: {
+                        vitKInjection: works.FormTwoA.assessment.newborn.otherEncGiven.vitKInjection,
+                        eyePropylaxis: works.FormTwoA.assessment.newborn.otherEncGiven.eyePropylaxis,
+                        newbornScreening: works.FormTwoA.assessment.newborn.otherEncGiven.newbornScreening,
+                        others: works.FormTwoA.assessment.newborn.otherEncGiven.others,
+                    },
+                    newbornScreeningDone: works.FormTwoA.assessment.newborn.newbornScreeningDone,
+                }
+            },
+            supplementation: {
+                noOfTabletsGiven: {
+                    no: works.FormTwoA.supplementation.noOfTabletsGiven.no,
+                    dateGiven: tabletsDate,
+                },
+                vitaminA: {
+                    no: works.FormTwoA.supplementation.vitaminA.no,
+                    dateGiven: vitaminADate,
+                },
+                ironSulfate:{
+                    no: works.FormTwoA.supplementation.ironSulfate.no,
+                    dateGiven: ironSulfateDate,
+                }
+            }
+
     }
 
     const onSubmit = (values) => {
@@ -43,10 +150,9 @@ export default function FormTwoA({works}) {
 
     async  function updateUsers2(values) {
 
-        const userRef = doc(db, 'client', works.id);
-        const newValues = JSON.parse(JSON.stringify(values))
+        const userRef = doc(db, 'newClient', works.id);
         await  updateDoc(userRef,{
-            FormTwoA: newValues
+            FormTwoA: values
 
         })
     }
@@ -461,6 +567,23 @@ export default function FormTwoA({works}) {
                                                         <GridItem>
                                                             <DatePicker
                                                                 name="supplementation.vitaminA.dateGiven" />
+                                                        </GridItem>
+                                                    </SimpleGrid>
+
+                                                    <SimpleGrid spacingX={5} columns={2}>
+                                                        <GridItem colSpan={2}>
+                                                            <FormLabel>
+                                                               Iron Sulfate
+                                                            </FormLabel>
+                                                        </GridItem>
+                                                        <GridItem>
+                                                            <NumberField
+                                                                placeholder="Number"
+                                                                name="supplementation.ironSulfate.no" />
+                                                        </GridItem>
+                                                        <GridItem>
+                                                            <DatePicker
+                                                                name="supplementation.ironSulfate.dateGiven" />
                                                         </GridItem>
                                                     </SimpleGrid>
                                                 </Box>

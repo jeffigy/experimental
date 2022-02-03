@@ -13,13 +13,14 @@ import ViewClient from "./ViewClient";
 import UpdateClient from "./UpdateClient";
 import Create from "./Create";
 import DataTable from "react-data-table-component";
+import moment from "moment";
 
 
 export default function IndexClient() {
     const [filterText, setFilterText] = useState("");
     const [targetClient, setTargetClient] = useState([]);
     const Data = () => {
-        const usersCollectionRef = collection(db, "client");
+        const usersCollectionRef = collection(db, "newClient");
         onSnapshot(usersCollectionRef, (snapshot) => {
             let userData = []
             snapshot.docs.forEach(doc => {

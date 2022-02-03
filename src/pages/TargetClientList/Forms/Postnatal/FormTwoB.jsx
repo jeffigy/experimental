@@ -37,10 +37,49 @@ import { db } from "../../../../utils/init-firebase";
 import NumberField from "../../../components/Fields/NumberField";
 
 export default function FormTwoB({works}) {
+    const row1date = new Date(works.FormTwoB.records.row1.date.seconds* 1000);
+    const row1followdate = new Date(works.FormTwoB.records.row1.nextFollowUpSchedule.seconds* 1000);
+    const row2date = new Date(works.FormTwoB.records.row2.date.seconds* 1000);
+    const row2followdate = new Date(works.FormTwoB.records.row2.nextFollowUpSchedule.seconds* 1000);
+    const row3date = new Date(works.FormTwoB.records.row3.date.seconds* 1000);
+    const row3followdate = new Date(works.FormTwoB.records.row3.nextFollowUpSchedule.seconds* 1000);
+    const row4date = new Date(works.FormTwoB.records.row4.date.seconds* 1000);
+    const row4followdate = new Date(works.FormTwoB.records.row4.nextFollowUpSchedule.seconds* 1000);
 
     const initialValues = {
 
-    ...works.FormTwoB
+
+            records: {
+                row1: {
+                    date: row1date,
+                    complaints: works.FormTwoB.records.row1.complaints,
+                    mncServicesGiven: works.FormTwoB.records.row1.mncServicesGiven,
+                    nameOfProviderAndSignature: works.FormTwoB.records.row1.nameOfProviderAndSignature,
+                    nextFollowUpSchedule: row1followdate,
+                },
+                row2: {
+                    date: row2date,
+                    complaints: works.FormTwoB.records.row2.complaints,
+                    mncServicesGiven: works.FormTwoB.records.row2.mncServicesGiven,
+                    nameOfProviderAndSignature: works.FormTwoB.records.row2.nameOfProviderAndSignature,
+                    nextFollowUpSchedule: row2followdate,
+                },
+                row3: {
+                    date: row3date,
+                    complaints: works.FormTwoB.records.row3.complaints,
+                    mncServicesGiven: works.FormTwoB.records.row3.mncServicesGiven,
+                    nameOfProviderAndSignature: works.FormTwoB.records.row3.nameOfProviderAndSignature,
+                    nextFollowUpSchedule: row3followdate,
+                },
+                row4: {
+                    date: row4date,
+                    complaints: works.FormTwoB.records.row4.complaints,
+                    mncServicesGiven: works.FormTwoB.records.row4.mncServicesGiven,
+                    nameOfProviderAndSignature: works.FormTwoB.records.row4.nameOfProviderAndSignature,
+                    nextFollowUpSchedule: row4followdate,
+                }
+            }
+
 
     }
 
@@ -50,10 +89,10 @@ export default function FormTwoB({works}) {
 
     async  function updateUsers2(values) {
 
-        const userRef = doc(db, 'client', works.id);
-        const newValues = JSON.parse(JSON.stringify(values))
+        const userRef = doc(db, 'newClient', works.id);
+
         await  updateDoc(userRef,{
-            FormTwoB: newValues
+            FormTwoB: values
 
         })
     }

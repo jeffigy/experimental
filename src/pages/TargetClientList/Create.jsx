@@ -44,7 +44,7 @@ export default function Create() {
         const tomorrow = new Date()
 
 
-        const usersCollectionRef = collection(db, "client")
+        const usersCollectionRef = collection(db, "newClient")
         await addDoc(usersCollectionRef,
             {
                 first: values.firstname,
@@ -57,7 +57,7 @@ export default function Create() {
                 FormTwoA: {
                     dateOfVisit: new Date(),
                     physicalExamination: {
-                        dateOfDelivery: '',
+                        dateOfDelivery: new Date(),
                         attendant: '',
                         sex: '',
                         typeOfDelivery: '',
@@ -147,6 +147,10 @@ export default function Create() {
                             dateGiven: new Date()
                         },
                         vitaminA: {
+                            no: '',
+                            dateGiven: new Date()
+                        },
+                        ironSulfate: {
                             no: '',
                             dateGiven: new Date()
                         }

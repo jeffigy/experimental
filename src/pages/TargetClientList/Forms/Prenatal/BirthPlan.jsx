@@ -90,7 +90,7 @@ export default function BirthPlan({works}) {
 
     async  function updateUsers2(values) {
 
-        const userRef = doc(db, 'client', works.id);
+        const userRef = doc(db, 'newClient', works.id);
         await  updateDoc(userRef,{
             BirthPlan: values
 

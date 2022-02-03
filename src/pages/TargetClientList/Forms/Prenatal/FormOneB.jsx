@@ -38,164 +38,190 @@ import NumberField from "../../../components/Fields/NumberField";
 
 export default function FormOneB({works}) {
 
-    const initialValues = {
 
+     const row1date=       new Date(works.FormOneB.records.row1.date.seconds * 1000);
+      const row1FollowUp=    new Date(works.FormOneB.records.row1.nextFollowUpSchedule.seconds * 1000);
+
+    const row2date=       new Date(works.FormOneB.records.row2.date.seconds * 1000);
+    const row2FollowUp=    new Date(works.FormOneB.records.row2.nextFollowUpSchedule.seconds * 1000);
+
+    const row3date=       new Date(works.FormOneB.records.row3.date.seconds * 1000);
+    const row3FollowUp=    new Date(works.FormOneB.records.row3.nextFollowUpSchedule.seconds * 1000);
+
+    const row4date=       new Date(works.FormOneB.records.row4.date.seconds * 1000);
+    const row4FollowUp=    new Date(works.FormOneB.records.row4.nextFollowUpSchedule.seconds * 1000);
+
+
+    const firstMonthdate=       new Date(works.FormOneB.abdominalExamFindings.firstTrimester.firstMonth.date.seconds * 1000);
+    const secondMonthdate=new Date(works.FormOneB.abdominalExamFindings.firstTrimester.secondMonth.date.seconds * 1000);
+    const thirdMonthdate=new Date(works.FormOneB.abdominalExamFindings.firstTrimester.thirdMonth.date.seconds * 1000);
+    const fourthMonthdate=new Date(works.FormOneB.abdominalExamFindings.secondTrimester.fourthMonth.date.seconds * 1000);
+    const fifthMonthdate=new Date(works.FormOneB.abdominalExamFindings.secondTrimester.fifthMonth.date.seconds * 1000);
+    const sixthMonthdate=new Date(works.FormOneB.abdominalExamFindings.secondTrimester.sixthMonth.date.seconds * 1000);
+    const seventhMonthdate=new Date(works.FormOneB.abdominalExamFindings.thirdTrimester.seventhMonth.date.seconds * 1000);
+    const eightMonthdate=new Date(works.FormOneB.abdominalExamFindings.thirdTrimester.eightMonth.date.seconds * 1000);
+    const ninethMonthdate=new Date(works.FormOneB.abdominalExamFindings.thirdTrimester.ninethMonth.date.seconds * 1000);
+
+    const remarksDate=new Date(   works.FormOneB.abdominalExamFindings.remarks.date.seconds * 1000);
+const newVal=""
+    const initialValues = {
             records: {
                 row1: {
-                    date: new Date(),
-                    complaints: '',
-                    mncServicesGiven: '',
-                    nameOfProviderAndSignature: '',
-                    nextFollowUpSchedule: new Date()
+                    date: row1date,
+                    complaints: works.FormOneB.records.row1.complaints,
+                    mncServicesGiven: works.FormOneB.records.row1.mncServicesGiven,
+                    nameOfProviderAndSignature: works.FormOneB.records.row1.nameOfProviderAndSignature,
+                    nextFollowUpSchedule: row1FollowUp,
                 },
                 row2: {
-                    date: new Date(),
-                    complaints: '',
-                    mncServicesGiven: '',
-                    nameOfProviderAndSignature: '',
-                    nextFollowUpSchedule: new Date()
+                    date: row2date,
+                    complaints: works.FormOneB.records.row2.complaints,
+                    mncServicesGiven: works.FormOneB.records.row2.mncServicesGiven,
+                    nameOfProviderAndSignature: works.FormOneB.records.row2.nameOfProviderAndSignature,
+                    nextFollowUpSchedule: row2FollowUp,
                 },
                 row3: {
-                    date: new Date(),
-                    complaints: '',
-                    mncServicesGiven: '',
-                    nameOfProviderAndSignature: '',
-                    nextFollowUpSchedule: new Date()
+                    date: row3date,
+                    complaints: works.FormOneB.records.row3.complaints,
+                    mncServicesGiven: works.FormOneB.records.row3.mncServicesGiven,
+                    nameOfProviderAndSignature: works.FormOneB.records.row3.nameOfProviderAndSignature,
+                    nextFollowUpSchedule: row3FollowUp,
                 },
                 row4: {
-                    date: new Date(),
-                    complaints: '',
-                    mncServicesGiven: '',
-                    nameOfProviderAndSignature: '',
-                    nextFollowUpSchedule: new Date()
+                    date: row4date,
+                    complaints: works.FormOneB.records.row4.complaints,
+                    mncServicesGiven: works.FormOneB.records.row4.mncServicesGiven,
+                    nameOfProviderAndSignature: works.FormOneB.records.row4.nameOfProviderAndSignature,
+                    nextFollowUpSchedule: row4FollowUp,
                 }
             },
             abdominalExamFindings: {
                 firstTrimester: {
                     firstMonth: {
-                        date: new Date(),
-                        fundicHeight: '',
-                        fetalHeartTomes: '',
-                        aog: '',
-                        leopolds: '',
-                        lOne: '',
-                        lTwo: '',
-                        lThree: '',
-                        lFour: '',
-                        uterineAcitivty: ''
+                        date: firstMonthdate,
+                        fundicHeight: works.FormOneB.abdominalExamFindings.firstTrimester.firstMonth.fundicHeight,
+                        fetalHeartTomes: works.FormOneB.abdominalExamFindings.firstTrimester.firstMonth.fetalHeartTomes,
+                        aog: works.FormOneB.abdominalExamFindings.firstTrimester.firstMonth.aog,
+                        leopolds: works.FormOneB.abdominalExamFindings.firstTrimester.firstMonth.leopolds,
+                        lOne: works.FormOneB.abdominalExamFindings.firstTrimester.firstMonth.lOne,
+                        lTwo: works.FormOneB.abdominalExamFindings.firstTrimester.firstMonth.lTwo,
+                        lThree: works.FormOneB.abdominalExamFindings.firstTrimester.firstMonth.lThree,
+                        lFour: works.FormOneB.abdominalExamFindings.firstTrimester.firstMonth.lFour,
+                        uterineAcitivty: works.FormOneB.abdominalExamFindings.firstTrimester.firstMonth.uterineAcitivty,
                     },
                     secondMonth: {
-                        date: new Date(),
-                        fundicHeight: '',
-                        fetalHeartTomes: '',
-                        aog: '',
-                        leopolds: '',
-                        lOne: '',
-                        lTwo: '',
-                        lThree: '',
-                        lFour: '',
-                        uterineAcitivty: ''
+                        date: secondMonthdate,
+                        fundicHeight: works.FormOneB.abdominalExamFindings.firstTrimester.secondMonth.fundicHeight,
+                        fetalHeartTomes: works.FormOneB.abdominalExamFindings.firstTrimester.secondMonth.fetalHeartTomes,
+                        aog: works.FormOneB.abdominalExamFindings.firstTrimester.secondMonth.aog,
+                        leopolds: works.FormOneB.abdominalExamFindings.firstTrimester.secondMonth.leopolds,
+                        lOne: works.FormOneB.abdominalExamFindings.firstTrimester.secondMonth.lOne,
+                        lTwo: works.FormOneB.abdominalExamFindings.firstTrimester.secondMonth.lTwo,
+                        lThree: works.FormOneB.abdominalExamFindings.firstTrimester.secondMonth.lThree,
+                        lFour: works.FormOneB.abdominalExamFindings.firstTrimester.secondMonth.lFour,
+                        uterineAcitivty: works.FormOneB.abdominalExamFindings.firstTrimester.secondMonth.uterineAcitivty,
                     },
                     thirdMonth: {
-                        date: new Date(),
-                        fundicHeight: '',
-                        fetalHeartTomes: '',
-                        aog: '',
-                        leopolds: '',
-                        lOne: '',
-                        lTwo: '',
-                        lThree: '',
-                        lFour: '',
-                        uterineAcitivty: ''
+                        date: thirdMonthdate,
+                        fundicHeight: works.FormOneB.abdominalExamFindings.firstTrimester.thirdMonth.fundicHeight,
+                        fetalHeartTomes: works.FormOneB.abdominalExamFindings.firstTrimester.thirdMonth.fetalHeartTomes,
+                        aog: works.FormOneB.abdominalExamFindings.firstTrimester.thirdMonth.aog,
+                        leopolds: works.FormOneB.abdominalExamFindings.firstTrimester.thirdMonth.leopolds,
+                        lOne: works.FormOneB.abdominalExamFindings.firstTrimester.thirdMonth.lOne,
+                        lTwo: works.FormOneB.abdominalExamFindings.firstTrimester.thirdMonth.lTwo,
+                        lThree: works.FormOneB.abdominalExamFindings.firstTrimester.thirdMonth.lThree,
+                        lFour: works.FormOneB.abdominalExamFindings.firstTrimester.thirdMonth.lFour,
+                        uterineAcitivty: works.FormOneB.abdominalExamFindings.firstTrimester.thirdMonth.uterineAcitivty,
 
                     }
                 },
                 secondTrimester: {
                     fourthMonth: {
-                        date: new Date(),
-                        fetalHeartTomes: '',
-                        aog: '',
-                        leopolds: '',
-                        lOne: '',
-                        lTwo: '',
-                        lThree: '',
-                        lFour: '',
-                        uterineAcitivty: ''
+                        date: fourthMonthdate,
+                        fundicHeight: works.FormOneB.abdominalExamFindings.secondTrimester.fourthMonth.fundicHeight,
+                        fetalHeartTomes: works.FormOneB.abdominalExamFindings.secondTrimester.fourthMonth.fetalHeartTomes,
+                        aog: works.FormOneB.abdominalExamFindings.secondTrimester.fourthMonth.aog,
+                        leopolds: works.FormOneB.abdominalExamFindings.secondTrimester.fourthMonth.leopolds,
+                        lOne: works.FormOneB.abdominalExamFindings.secondTrimester.fourthMonth.lOne,
+                        lTwo: works.FormOneB.abdominalExamFindings.secondTrimester.fourthMonth.lTwo,
+                        lThree: works.FormOneB.abdominalExamFindings.secondTrimester.fourthMonth.lThree,
+                        lFour: works.FormOneB.abdominalExamFindings.secondTrimester.fourthMonth.lFour,
+                        uterineAcitivty: works.FormOneB.abdominalExamFindings.secondTrimester.fourthMonth.uterineAcitivty,
                     },
                     fifthMonth: {
-                        date: new Date(),
-                        fundicHeight: '',
-                        fetalHeartTomes: '',
-                        aog: '',
-                        leopolds: '',
-                        lOne: '',
-                        lTwo: '',
-                        lThree: '',
-                        lFour: '',
-                        uterineAcitivty: ''
+                        date: fifthMonthdate,
+                        fundicHeight: works.FormOneB.abdominalExamFindings.secondTrimester.fifthMonth.fundicHeight,
+                        fetalHeartTomes: works.FormOneB.abdominalExamFindings.secondTrimester.fifthMonth.fetalHeartTomes,
+                        aog: works.FormOneB.abdominalExamFindings.secondTrimester.fifthMonth.aog,
+                        leopolds: works.FormOneB.abdominalExamFindings.secondTrimester.fifthMonth.leopolds,
+                        lOne: works.FormOneB.abdominalExamFindings.secondTrimester.fifthMonth.lOne,
+                        lTwo: works.FormOneB.abdominalExamFindings.secondTrimester.fifthMonth.lTwo,
+                        lThree: works.FormOneB.abdominalExamFindings.secondTrimester.fifthMonth.lThree,
+                        lFour: works.FormOneB.abdominalExamFindings.secondTrimester.fifthMonth.lFour,
+                        uterineAcitivty: works.FormOneB.abdominalExamFindings.secondTrimester.fifthMonth.uterineAcitivty,
                     },
                     sixthMonth: {
-                        date: new Date(),
-                        fundicHeight: '',
-                        fetalHeartTomes: '',
-                        aog: '',
-                        leopolds: '',
-                        lOne: '',
-                        lTwo: '',
-                        lThree: '',
-                        lFour: '',
-                        uterineAcitivty: ''
+                        date: sixthMonthdate,
+                        fundicHeight: works.FormOneB.abdominalExamFindings.secondTrimester.sixthMonth.fundicHeight,
+                        fetalHeartTomes: works.FormOneB.abdominalExamFindings.secondTrimester.sixthMonth.fetalHeartTomes,
+                        aog: works.FormOneB.abdominalExamFindings.secondTrimester.sixthMonth.aog,
+                        leopolds: works.FormOneB.abdominalExamFindings.secondTrimester.sixthMonth.leopolds,
+                        lOne: works.FormOneB.abdominalExamFindings.secondTrimester.sixthMonth.lOne,
+                        lTwo: works.FormOneB.abdominalExamFindings.secondTrimester.sixthMonth.lTwo,
+                        lThree: works.FormOneB.abdominalExamFindings.secondTrimester.sixthMonth.lThree,
+                        lFour: works.FormOneB.abdominalExamFindings.secondTrimester.sixthMonth.lFour,
+                        uterineAcitivty: works.FormOneB.abdominalExamFindings.secondTrimester.sixthMonth.uterineAcitivty,
                     }
                 },
                 thirdTrimester: {
                     seventhMonth: {
-                        date: new Date(),
-                        fundicHeight: '',
-                        fetalHeartTomes: '',
-                        aog: '',
-                        leopolds: '',
-                        lOne: '',
-                        lTwo: '',
-                        lThree: '',
-                        lFour: '',
-                        uterineAcitivty: ''
+                        date: seventhMonthdate,
+                        fundicHeight: works.FormOneB.abdominalExamFindings.thirdTrimester.seventhMonth.fundicHeight,
+                        fetalHeartTomes: works.FormOneB.abdominalExamFindings.thirdTrimester.seventhMonth.fetalHeartTomes,
+                        aog: works.FormOneB.abdominalExamFindings.thirdTrimester.seventhMonth.aog,
+                        leopolds: works.FormOneB.abdominalExamFindings.thirdTrimester.seventhMonth.leopolds,
+                        lOne: works.FormOneB.abdominalExamFindings.thirdTrimester.seventhMonth.lOne,
+                        lTwo: works.FormOneB.abdominalExamFindings.thirdTrimester.seventhMonth.lTwo,
+                        lThree: works.FormOneB.abdominalExamFindings.thirdTrimester.seventhMonth.lThree,
+                        lFour: works.FormOneB.abdominalExamFindings.thirdTrimester.seventhMonth.lFour,
+                        uterineAcitivty: works.FormOneB.abdominalExamFindings.thirdTrimester.seventhMonth.uterineAcitivty,
                     },
                     eightMonth: {
-                        date: new Date(),
-                        fundicHeight: '',
-                        fetalHeartTomes: '',
-                        aog: '',
-                        leopolds: '',
-                        lOne: '',
-                        lTwo: '',
-                        lThree: '',
-                        lFour: '',
-                        uterineAcitivty: ''
+                        date: eightMonthdate,
+                        fundicHeight: works.FormOneB.abdominalExamFindings.thirdTrimester.eightMonth.fundicHeight,
+                        fetalHeartTomes: works.FormOneB.abdominalExamFindings.thirdTrimester.eightMonth.fetalHeartTomes,
+                        aog: works.FormOneB.abdominalExamFindings.thirdTrimester.eightMonth.aog,
+                        leopolds: works.FormOneB.abdominalExamFindings.thirdTrimester.eightMonth.leopolds,
+                        lOne: works.FormOneB.abdominalExamFindings.thirdTrimester.eightMonth.lOne,
+                        lTwo: works.FormOneB.abdominalExamFindings.thirdTrimester.eightMonth.lTwo,
+                        lThree: works.FormOneB.abdominalExamFindings.thirdTrimester.eightMonth.lThree,
+                        lFour: works.FormOneB.abdominalExamFindings.thirdTrimester.eightMonth.lFour,
+                        uterineAcitivty: works.FormOneB.abdominalExamFindings.thirdTrimester.eightMonth.uterineAcitivty,
                     },
                     ninethMonth: {
-                        date: new Date(),
-                        fundicHeight: '',
-                        fetalHeartTomes: '',
-                        aog: '',
-                        leopolds: '',
-                        lOne: '',
-                        lTwo: '',
-                        lThree: '',
-                        lFour: '',
-                        uterineAcitivty: ''
+                        date: ninethMonthdate,
+                        fundicHeight: works.FormOneB.abdominalExamFindings.thirdTrimester.ninethMonth.fundicHeight,
+                        fetalHeartTomes: works.FormOneB.abdominalExamFindings.thirdTrimester.ninethMonth.fetalHeartTomes,
+                        aog: works.FormOneB.abdominalExamFindings.thirdTrimester.ninethMonth.aog,
+                        leopolds: works.FormOneB.abdominalExamFindings.thirdTrimester.ninethMonth.leopolds,
+                        lOne: works.FormOneB.abdominalExamFindings.thirdTrimester.ninethMonth.lOne,
+                        lTwo: works.FormOneB.abdominalExamFindings.thirdTrimester.ninethMonth.lTwo,
+                        lThree: works.FormOneB.abdominalExamFindings.thirdTrimester.ninethMonth.lThree,
+                        lFour: works.FormOneB.abdominalExamFindings.thirdTrimester.ninethMonth.lFour,
+                        uterineAcitivty: works.FormOneB.abdominalExamFindings.thirdTrimester.ninethMonth.uterineAcitivty,
                     }
                 },
                 remarks: {
-                    date: new Date(),
-                    fundicHeight: '',
-                    fetalHeartTomes: '',
-                    aog: '',
-                    leopolds: '',
-                    lOne: '',
-                    lTwo: '',
-                    lThree: '',
-                    lFour: '',
-                    uterineAcitivty: ''
+                    date: remarksDate,
+                    fundicHeight: works.FormOneB.abdominalExamFindings.remarks.fundicHeight,
+                    fetalHeartTomes: works.FormOneB.abdominalExamFindings.remarks.fetalHeartTomes,
+                    aog: works.FormOneB.abdominalExamFindings.remarks.aog,
+                    leopolds: works.FormOneB.abdominalExamFindings.remarks.leopolds,
+                    lOne: works.FormOneB.abdominalExamFindings.remarks.lOne,
+                    lTwo: works.FormOneB.abdominalExamFindings.remarks.lTwo,
+                    lThree: works.FormOneB.abdominalExamFindings,
+                    lFour: works.FormOneB.abdominalExamFindings.remarks.lFour,
+                    uterineAcitivty: works.FormOneB.abdominalExamFindings.remarks.uterineAcitivty,
                 }
             }
 
@@ -212,7 +238,7 @@ export default function FormOneB({works}) {
 
     async  function updateUsers2(values) {
 
-        const userRef = doc(db, 'client', works.id);
+        const userRef = doc(db, 'newClient', works.id);
         await  updateDoc(userRef,{
             FormOneB: values
 
@@ -352,7 +378,7 @@ export default function FormOneB({works}) {
                                                                             1st mo
                                                                         </Text>
                                                                     </Center>
-                                                                    <TextField
+                                                                    <DatePicker
                                                                         label=""
                                                                         name="abdominalExamFindings.firstTrimester.firstMonth.date"
                                                                     />
@@ -401,7 +427,7 @@ export default function FormOneB({works}) {
                                                                             2nd mo
                                                                         </Text>
                                                                     </Center>
-                                                                    <TextField
+                                                                    <DatePicker
                                                                         label=""
                                                                         name="abdominalExamFindings.firstTrimester.secondMonth.date"
                                                                     />
@@ -450,7 +476,7 @@ export default function FormOneB({works}) {
                                                                             3rd mo
                                                                         </Text>
                                                                     </Center>
-                                                                    <TextField
+                                                                    <DatePicker
                                                                         label=""
                                                                         name="abdominalExamFindings.firstTrimester.thirdMonth.date"
                                                                     />
@@ -516,7 +542,7 @@ export default function FormOneB({works}) {
                                                                             4th mo
                                                                         </Text>
                                                                     </Center>
-                                                                    <TextField
+                                                                    <DatePicker
                                                                         label=""
                                                                         name="abdominalExamFindings.secondTrimester.fourthMonth.date"
                                                                     />
@@ -565,7 +591,7 @@ export default function FormOneB({works}) {
                                                                             5th mo
                                                                         </Text>
                                                                     </Center>
-                                                                    <TextField
+                                                                    <DatePicker
                                                                         label=""
                                                                         name="abdominalExamFindings.secondTrimester.fifthMonth.date"
                                                                     />
@@ -614,7 +640,7 @@ export default function FormOneB({works}) {
                                                                             6th mo
                                                                         </Text>
                                                                     </Center>
-                                                                    <TextField
+                                                                    <DatePicker
                                                                         label=""
                                                                         name="abdominalExamFindings.secondTrimester.sixthMonth.date"
                                                                     />
@@ -680,7 +706,7 @@ export default function FormOneB({works}) {
                                                                             7th mo
                                                                         </Text>
                                                                     </Center>
-                                                                    <TextField
+                                                                    <DatePicker
                                                                         label=""
                                                                         name="abdominalExamFindings.thirdTrimester.seventhMonth.date"
                                                                     />
@@ -729,7 +755,7 @@ export default function FormOneB({works}) {
                                                                             8th mo
                                                                         </Text>
                                                                     </Center>
-                                                                    <TextField
+                                                                    <DatePicker
                                                                         label=""
                                                                         name="abdominalExamFindings.thirdTrimester.eightMonth.date"
                                                                     />
@@ -778,7 +804,7 @@ export default function FormOneB({works}) {
                                                                             9th mo
                                                                         </Text>
                                                                     </Center>
-                                                                    <TextField
+                                                                    <DatePicker
                                                                         label=""
                                                                         name="abdominalExamFindings.thirdTrimester.ninethMonth.date"
                                                                     />
@@ -839,7 +865,7 @@ export default function FormOneB({works}) {
                                                             </GridItem>
                                                             <GridItem>
                                                                 <VStack spacing='3px'>
-                                                                    <TextField
+                                                                    <DatePicker
                                                                         label=""
                                                                         name="abdominalExamFindings.remarks.date"
                                                                     />
