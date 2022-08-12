@@ -40,7 +40,7 @@ const Navbar = () => {
               fontFamily={"heading"}
               fontWeight="600"
             >
-              FHSIS
+              St. Jude Dental Clinic System
             </Text>
           </Link>
           <Flex display={{ base: "none", md: "flex" }} ml={10}>
@@ -71,10 +71,10 @@ const Navbar = () => {
                 fontSize={"sm"}
                 fontWeight={600}
                 color={"white"}
-                colorScheme="blue"
+                colorScheme="purple"
                 href={"#"}
                 _hover={{
-                  bg: "blue.300"
+                  bg: "purple.300"
                 }}
               >
                 Register
